@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.3"
+  ar_flutter_plugin_flutterflow:
+    dependency: "direct main"
+    description:
+      name: ar_flutter_plugin_flutterflow
+      sha256: adceda900bf5dd77beaa0a311f08a30ec2b8e6805acd7e69a4d63837c62450bb
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.39"
   args:
     dependency: transitive
     description:

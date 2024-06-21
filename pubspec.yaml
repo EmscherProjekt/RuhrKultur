@@ -31,6 +31,7 @@ dependencies:
   audio_video_progress_bar: ^2.0.3
   ar_flutter_plugin: ^0.7.3
   flutter_archive: ^6.0.3
+  ar_flutter_plugin_flutterflow: ^0.7.39
 
 dev_dependencies:
   # #to make native splash screen
