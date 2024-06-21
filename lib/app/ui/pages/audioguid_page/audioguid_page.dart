@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
-import 'package:ruhrkultur/app/data/models/audioguid/audioguid.dart';
-import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class AudioguidPage extends GetView {
   AudioguidPage({Key? key}) : super(key: key);
-  @override
+
   void onInit() {
     Get.find<AudioGuideController>().fetchAudioGuidesSafe();
   }
@@ -16,20 +14,22 @@ class AudioguidPage extends GetView {
   @override
   Widget build(BuildContext context) {
     AudioGuideController controller = Get.put(AudioGuideController());
-    AudioGuide guide = controller.selectedGuide.value;
+
     return Center(
       child: Obx(
         () {
           if (controller.isLoading.value) {
             return Center(child: CircularProgressIndicator());
           } else if (controller.audioGuides.isEmpty) {
-            return Center(child: Column(
+            return Center(
+                child: Column(
               children: [
                 Text("No data found."),
-                TextButton(onPressed: () {
-                  controller.fetchAudioGuidesSafe();
-                  
-                }, child: Text("No data found, tap to reload.")),
+                TextButton(
+                    onPressed: () {
+                      controller.fetchAudioGuidesSafe();
+                    },
+                    child: Text("No data found, tap to reload.")),
               ],
             ));
           } else {
@@ -37,20 +37,89 @@ class AudioguidPage extends GetView {
               itemCount: controller.audioGuides.length,
               itemBuilder: (context, index) {
                 final guide = controller.audioGuides[index];
-                return ListTile(
-                  leading: CachedNetworkImage(
-                    imageUrl: guide.imageUrl,
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                Card(
+                  elevation: 12,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
-                  title: Text(guide.audioName),
-                  subtitle: Text(guide.audioBeschreibung),
-                  onTap: () {
-                    
-                    controller.setSelectedGuide(guide); // Set the selected guide
-                    Get.to(() =>
-                        AudioguiddeatilpagePage()); // Navigate to DetailPage
-                  },
+                  color: Colors.black,
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: guide.imageUrl,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          height: 200,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          guide.audioName,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        subtitle: Text(
+                          guide.audioBeschreibung,
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Colors.white),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    "Merken",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Colors.red),
+                                  onPressed: () {
+                                    controller.setSelectedGuide(guide);
+                                    Get.to(() => AudioguiddeatilpagePage());
+                                  },
+                                  child: const Text(
+                                    "Zum Guid",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ))
+                    ],
+                  ),
                 );
               },
             );
