@@ -144,8 +144,6 @@ class PlayButton extends StatelessWidget {
     
   @override
   Widget build(BuildContext context) {
-        AudioGuideController controller = Get.find();
-    AudioGuide guide = controller.selectedGuide.value;
     final pageManager = getIt<PageManager>();
     return  ValueListenableBuilder<ButtonState>(
       valueListenable: pageManager.playButtonNotifier,

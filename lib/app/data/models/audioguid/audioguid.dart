@@ -30,7 +30,7 @@ class AudioGuide {
   factory AudioGuide.fromJson(Map<String, dynamic> json) {
     return AudioGuide(
       id: json['id'] ?? 0,
-      audioName: "https://ruhrkulturerlebnis.de/" +json['AudioName'] ?? '',
+      audioName: json['AudioName'] ?? '',
       audioBeschreibung: json['AudioBeschreibung'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       audioUrl: json['audioUrl'] ?? '',

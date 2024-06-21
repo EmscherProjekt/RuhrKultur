@@ -31,10 +31,8 @@ class AudioGuideController extends GetxController {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuides();
-      if (guides != null) {
-        audioGuides.assignAll(guides);
-      }
-    } finally {
+      audioGuides.assignAll(guides);
+        } finally {
       isLoading(false);
     }
   }
@@ -42,10 +40,8 @@ class AudioGuideController extends GetxController {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuidesSafe();
-      if (guides != null) {
-        audioGuides.assignAll(guides);
-      }
-    } finally {
+      audioGuides.assignAll(guides);
+        } finally {
       isLoading(false);
     }
   }

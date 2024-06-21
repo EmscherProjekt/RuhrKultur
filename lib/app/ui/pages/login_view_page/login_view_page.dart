@@ -5,10 +5,11 @@ import 'package:ruhrkultur/app/data/models/login_request_model/login_request_mod
 import 'package:ruhrkultur/app/data/services/login_service.dart';
 import '../../../controllers/login_view_controller.dart';
 
+// ignore: must_be_immutable
 class LoginViewPage extends GetView<LoginViewController> {
   LoginViewPage({Key? key}) : super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey();
-  LoginViewController get controller => Get.find<LoginViewController>();
+   LoginViewController get controller => Get.find<LoginViewController>();
   final TextEditingController emailCtr = TextEditingController();
   final TextEditingController passwordCtr = TextEditingController();
   final TextEditingController usernameCtr = TextEditingController();
