@@ -1,10 +1,11 @@
-# RuhrKultur App
-Das ist die App 
-Geschrieben in Dart mit dem Crossplatform Framework Flutter
+---
+layout: landing
+---
 
-## Getting Started
-1. Dart & Flutter lernen (bsichen verstehen)
-2. Repo Clonen
-3. Pull  reqesut erstellen
+# Willkommen
 
-## Bitte Testes die Funktionen erst bevor ihr ein Pull öffent
+
+
+{% hint style="info" %}
+Die Docs befinden sich noch im Aufbau.w
+{% endhint %}
