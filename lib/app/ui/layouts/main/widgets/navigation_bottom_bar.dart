@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/navigation_controller.dart';
-import 'package:ruhrkultur/app/routes/app_routes.dart';
-import 'package:ruhrkultur/app/ui/pages/ar_exmaple_page/ar_exmaple_page.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/audioguid_page.dart';
 import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
 import 'package:ruhrkultur/app/ui/pages/setting_view_page/setting_view_page.dart';
@@ -43,7 +41,7 @@ class NavigationBottomBar extends GetView<NavigationController> {
           ),
           body: <Widget>[
             // New AudioGuid
-          LocalAndWebObjectsWidget(),
+            HomePage(),
             AudioguidPage(),
            SettingViewPage(),
           ][navigationController.currentIndex.value]),

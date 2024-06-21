@@ -1,5 +1,4 @@
-import '../bindings/ar_exmaple_binding.dart';
-import '../ui/pages/ar_exmaple_page/ar_exmaple_page.dart';
+
       import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
 
 import '../bindings/setting_view_binding.dart';
@@ -8,8 +7,7 @@ import '../ui/pages/setting_view_page/setting_view_page.dart';
 import '../ui/pages/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
       import '../bindings/audioguid_binding.dart';
 import '../ui/pages/audioguid_page/audioguid_page.dart';
-      import '../bindings/audioguid_binding.dart';
-import '../ui/pages/audioguid_page/audioguid_page.dart';
+
       import '../bindings/onboard_view_binding.dart';
 import '../ui/pages/onboard_view_page/onboard_view_page.dart';
       import '../bindings/splash_view_binding.dart';
@@ -20,7 +18,7 @@ import '../ui/pages/login_view_page/login_view_page.dart';
 
 
 import '../bindings/home_binding.dart';
-import '../ui/pages/home_page/home_page.dart';
+
 import '../ui/pages/unknown_route_page/unknown_route_page.dart';
 import 'app_routes.dart';
 
@@ -77,11 +75,6 @@ class AppPages {
       binding: SettingViewBinding(),
       transition: _defaultTransition,
     ),
-    GetPage(
-      name: AppRoutes.AR_EXMAPLE,
-      page: () => LocalAndWebObjectsWidget(),
-      binding: ArExmapleBinding(),
-      transition: _defaultTransition,
-    ), 
+
 ];
 }

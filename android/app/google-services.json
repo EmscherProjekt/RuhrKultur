@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "852027341174",
+    "firebase_url": "https://ruhurkultur-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ruhurkultur",
+    "storage_bucket": "ruhurkultur.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852027341174:android:028b2a643ee532ca072257",
+        "android_client_info": {
+          "package_name": "com.filmprojekt1.ruhrkulturerlebnisapp.reka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852027341174-h6d3vckshkthfs4pg4rfi4tfaj3ks6uj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.filmprojekt1.ruhrkulturerlebnisapp.reka",
+            "certificate_hash": "30001823dc988d50ccff21536604b283e6699f46"
+          }
+        },
+        {
+          "client_id": "852027341174-r39n8hmm35hufh8e8rkdrqpd06oknjnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCGzhKy_IHaxcUpjnaAAkvlkiRREuzGSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852027341174-r39n8hmm35hufh8e8rkdrqpd06oknjnk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "852027341174-dlvab444kstnruveffq6fnie2sthanae.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.filmprojekt1.ruhrkulturerlebnisapp.reka"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
