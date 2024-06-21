@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
+import 'package:ruhrkultur/app/data/models/audioguid/audioguid.dart';
+import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
+import 'package:ruhrkultur/app/ui/pages/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class AudioguidPage extends GetView {
+  AudioguidPage({Key? key}) : super(key: key);
+  @override
+  void onInit() {
+    Get.find<AudioGuideController>().fetchAudioGuidesSafe();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    AudioGuideController controller = Get.put(AudioGuideController());
+    AudioGuide guide = controller.selectedGuide.value;
+    return Center(
+      child: Obx(
+        () {
+          if (controller.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          } else if (controller.audioGuides.isEmpty) {
+            return Center(child: Column(
+              children: [
+                Text("No data found."),
+                TextButton(onPressed: () {
+                  controller.fetchAudioGuidesSafe();
+                  
+                }, child: Text("No data found, tap to reload.")),
+              ],
+            ));
+          } else {
+            return ListView.builder(
+              itemCount: controller.audioGuides.length,
+              itemBuilder: (context, index) {
+                final guide = controller.audioGuides[index];
+                return ListTile(
+                  leading: CachedNetworkImage(
+                    imageUrl: guide.imageUrl,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  title: Text(guide.audioName),
+                  subtitle: Text(guide.audioBeschreibung),
+                  onTap: () {
+                    
+                    controller.setSelectedGuide(guide); // Set the selected guide
+                    Get.to(() =>
+                        AudioguiddeatilpagePage()); // Navigate to DetailPage
+                  },
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
+}
