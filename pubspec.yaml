@@ -48,7 +48,10 @@ dev_dependencies:
   #   ios: true
   #   remove_alpha_ios: true
   #   image_path: "assets/icons/icon.png"
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/image/logo.png"
   flutter_test:
     sdk: flutter
 
