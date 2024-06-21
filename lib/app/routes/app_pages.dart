@@ -1,4 +1,6 @@
-import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
+import '../bindings/ar_exmaple_binding.dart';
+import '../ui/pages/ar_exmaple_page/ar_exmaple_page.dart';
+      import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
 
 import '../bindings/setting_view_binding.dart';
 import '../ui/pages/setting_view_page/setting_view_page.dart';
@@ -73,6 +75,12 @@ class AppPages {
       name: AppRoutes.SETTING_VIEW,
       page: () => const SettingViewPage(),
       binding: SettingViewBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.AR_EXMAPLE,
+      page: () => LocalAndWebObjectsWidget(),
+      binding: ArExmapleBinding(),
       transition: _defaultTransition,
     ), 
 ];

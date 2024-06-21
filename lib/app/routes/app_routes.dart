@@ -9,4 +9,5 @@
 
   static const AUDIOGUIDDEATILPAGE = '/audioguiddeatilpage';
   static const SETTING_VIEW = '/setting-view';
+  static const AR_EXMAPLE = '/ar-exmaple';
 }

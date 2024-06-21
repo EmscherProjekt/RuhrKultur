@@ -9,12 +9,17 @@ import 'package:ruhrkultur/app/data/services/service_locator.dart';
 
 class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
   AudioguiddeatilpagePage({Key? key}) : super(key: key);
+  void onInit() {}
 
   @override
   Widget build(BuildContext context) {
     AudioGuideController controller = Get.find();
     AudioGuide guide = controller.selectedGuide.value;
-
+    final PageManager pageManager = PageManager();
+    pageManager.stop();
+    pageManager.remove();
+    pageManager.add();
+ 
     return Scaffold(
       appBar: AppBar(
         title: Text(guide.audioName),
@@ -29,16 +34,15 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AspectRatio(
-            aspectRatio: 16 / 9, 
+            aspectRatio: 16 / 9,
             child: CachedNetworkImage(
               imageUrl: guide.imageUrl,
-              placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+              placeholder: (context, url) =>
+                  Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
-          PlayButton(
-            
-          ),
+          PlayButton(),
           Expanded(
             child: DefaultTabController(
               length: 3,
@@ -63,7 +67,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(guide.title,
-                                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold)),
                                 SizedBox(height: 10),
                                 Text(guide.description),
                               ],
@@ -75,7 +81,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Audio Files:', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Audio Files:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -85,7 +93,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                   },
                                 ),
                                 SizedBox(height: 10),
-                                Text('Images:', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Images:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -95,7 +105,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                   },
                                 ),
                                 SizedBox(height: 10),
-                                Text('Videos:', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Videos:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -113,7 +125,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Licenses:', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Licenses:',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -140,12 +154,12 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
 }
 
 class PlayButton extends StatelessWidget {
-   PlayButton({super.key});
-    
+  PlayButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     final pageManager = getIt<PageManager>();
-    return  ValueListenableBuilder<ButtonState>(
+    return ValueListenableBuilder<ButtonState>(
       valueListenable: pageManager.playButtonNotifier,
       builder: (_, value, __) {
         switch (value) {
@@ -160,7 +174,9 @@ class PlayButton extends StatelessWidget {
             return IconButton(
               icon: const Icon(Icons.play_arrow),
               iconSize: 32.0,
-              onPressed: () => pageManager.add(),
+              onPressed: 
+                pageManager.play,
+              
             );
           case ButtonState.playing:
             return IconButton(

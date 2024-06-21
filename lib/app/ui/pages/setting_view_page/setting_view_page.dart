@@ -153,7 +153,7 @@ class _SettingsPageState extends State<SettingViewPage> {
                         width: 100,
                         height: 100,
                         child: Image(
-                          image: AssetImage('assets/images/logo.png'),
+                          image: AssetImage('assets/image/logo.png'),
                         ),
                       ),
                     );
@@ -229,7 +229,6 @@ class _SingleSection extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          color: Colors.white,
           child: Column(
             children: children,
           ),

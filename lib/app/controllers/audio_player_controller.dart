@@ -65,6 +65,8 @@ class PageManager {
         playButtonNotifier.value = ButtonState.paused;
       } else if (processingState != AudioProcessingState.completed) {
         playButtonNotifier.value = ButtonState.playing;
+      } else if(isPlaying){
+        playButtonNotifier.value =ButtonState.playing;
       } else {
         _audioHandler.stop();
         remove();
@@ -172,7 +174,7 @@ class PageManager {
     );
 
     _audioHandler.addQueueItem(mediaItem);
-    play();
+
   }
 
   Future<void> addtest(id, album, title, artUri, audioUrl) async {
