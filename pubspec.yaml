@@ -30,6 +30,8 @@ dependencies:
   package_info_plus: ^8.0.0
   audio_video_progress_bar: ^2.0.3
   flutter_archive: ^6.0.3
+  rive: ^0.13.8
+  flutter_svg: ^2.0.10+1
 
 
 
