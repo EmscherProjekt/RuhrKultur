@@ -172,7 +172,7 @@ class _SettingsPageState extends State<SettingViewPage> {
                   icon: Icons.logout,
                   onTap: () {
                     AuthenticationController().logOut();
-                    Get.toNamed(AppRoutes.SPLASH_VIEW);
+                   
                   }),
             ],
           ),

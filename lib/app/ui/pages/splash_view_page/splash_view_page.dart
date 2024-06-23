@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
 import 'package:ruhrkultur/app/ui/pages/onboard_view_page/onboard_view_page.dart';
-
-
 import '../../../controllers/splash_view_controller.dart';
 
 class SplashViewPage extends GetView<SplashViewController> {
@@ -12,7 +10,8 @@ class SplashViewPage extends GetView<SplashViewController> {
       Get.put(AuthenticationController());
 
   Future<void> initSettings() async {
-    authController.checkLoginStatus();
+    // Add your initialization logic here
+    await Future.delayed(Duration(seconds: 2)); // Simulating some async work
   }
 
   @override
@@ -26,7 +25,7 @@ class SplashViewPage extends GetView<SplashViewController> {
           if (snapshot.hasError)
             return errorView(snapshot);
           else
-            return OnboardViewPage();
+            return OnboardViewPageWrapper();
         }
       },
     );
@@ -51,5 +50,26 @@ class SplashViewPage extends GetView<SplashViewController> {
         ],
       ),
     ));
+  }
+}
+
+class OnboardViewPageWrapper extends StatefulWidget {
+  @override
+  _OnboardViewPageWrapperState createState() => _OnboardViewPageWrapperState();
+}
+
+class _OnboardViewPageWrapperState extends State<OnboardViewPageWrapper> {
+  @override
+  void initState() {
+    super.initState();
+    // Schedule any state changes after the build phase
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Perform state changes here
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OnboardViewPage();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/cache_controller.dart';
+import 'package:ruhrkultur/app/routes/app_routes.dart';
 
 class AuthenticationController extends GetxController with CacheController {
   final isLogged = false.obs;
@@ -7,6 +8,7 @@ class AuthenticationController extends GetxController with CacheController {
   void logOut() {
     isLogged.value = false;
     removeToken();
+    goRightPage();
   }
 
   void login(String? token) async {
@@ -14,9 +16,16 @@ class AuthenticationController extends GetxController with CacheController {
     //Token is cached
     print(token);
     await saveToken(token);
-    checkLoginStatus();
+    goRightPage();
   }
-
+  void goRightPage(){
+    if(isLogged.value){
+      Get.offAllNamed(AppRoutes.HOME);
+    }else{
+      Get.offAllNamed(AppRoutes.LOGIN_VIEW);
+    }
+  
+  }
   void checkLoginStatus() {
     final token = getToken();
     if (token != null) {

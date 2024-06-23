@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:ruhrkultur/app/data/emu/form_type.dart';
-import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/already_have_account_text.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/do_not_have_account.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/login_signup_animated_form.dart';
@@ -31,7 +29,6 @@ class LoginViewPage extends GetView<LoginViewController> {
   final RiveAnimationControllerHelper riveHelper =
       RiveAnimationControllerHelper();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,218 +38,6 @@ class LoginViewPage extends GetView<LoginViewController> {
             ? _loginPage(context)
             : _registerPage(context)),
       ),
-    );
-  }
-
-  Widget loginForm(BuildContext context) {
-    return Obx(
-      () {
-        return LoadingOverlayPro(
-          isLoading: controller.isLoading.value,
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-              ),
-              Container(
-                height: 170.0,
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset('assets/image/logo_login.png'),
-              ),
-              SizedBox(height: 10.0),
-              Center(
-                child: Text(
-                  'Log into your account',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-              Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: emailCtr,
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? 'Please Enter Email'
-                            : null;
-                      },
-                      decoration: inputDecoration('E-mail', Icons.person),
-                    ),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? 'Please Enter Password'
-                            : null;
-                      },
-                      controller: passwordCtr,
-                      decoration: inputDecoration('Password', Icons.lock),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15.0),
-              ElevatedButton(
-                onPressed: () {
-                  controller.loginUser(emailCtr.text, passwordCtr.text);
-                },
-                child: Text('Login'),
-              ),
-              SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Don\'t have an account?'),
-                  SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: () {
-                      controller.setFormType(FormType.register);
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget registerForm(BuildContext context) {
-    return Obx(
-      () {
-        return LoadingOverlayPro(
-          isLoading: controller.isLoading.value,
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-              ),
-              Container(
-                height: 170.0,
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset('assets/image/logo_login.png'),
-              ),
-              SizedBox(height: 10.0),
-              Center(
-                child: Text(
-                  'Create your account',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-              Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: usernameCtr,
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? 'Please Enter Username'
-                            : null;
-                      },
-                      decoration: inputDecoration('Username', Icons.person),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      controller: emailCtr,
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? 'Please Enter Email'
-                            : null;
-                      },
-                      decoration: inputDecoration('E-mail', Icons.email),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? 'Please Enter Password'
-                            : null;
-                      },
-                      controller: passwordCtr,
-                      decoration: inputDecoration('Password', Icons.lock),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      validator: (value) {
-                        return (value == null ||
-                                value.isEmpty ||
-                                value != passwordCtr.text)
-                            ? 'Passwords does not match'
-                            : null;
-                      },
-                      decoration:
-                          inputDecoration('Retype Password', Icons.lock),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15.0),
-              ElevatedButton(
-                onPressed: () {
-                  controller.registerUser(firstNameCtr.text, lastNameCtr.text,
-                      usernameCtr.text, emailCtr.text, passwordCtr.text);
-                  Get.toNamed(AppRoutes.SPLASH_VIEW);
-                },
-                child: Text('Register'),
-              ),
-              SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Already have an account?'),
-                  SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: () {
-                      controller.setFormType(FormType.login);
-                    },
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -318,9 +103,9 @@ class LoginViewPage extends GetView<LoginViewController> {
               ),
               EmailAndPassword(),
               const SizedBox(height: 5),
-              const SigninWithGoogleText(),
+              //TODO:    const SigninWithGoogleText(),
               const SizedBox(height: 5),
-              InkWell(
+              /*     InkWell(
                 radius: 50,
                 onTap: () {
                   //TODO Immplent google
@@ -330,7 +115,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                   width: 40,
                   height: 40,
                 ),
-              ),
+              ), */
               const TermsAndConditionsText(),
               const SizedBox(height: 5),
               const DoNotHaveAccountText(),
@@ -371,9 +156,9 @@ class LoginViewPage extends GetView<LoginViewController> {
                       isSignUpPage: true,
                     ),
                     Gap(10.h),
-                 //TODO:   const SigninWithGoogleText(),
+                    //TODO:   const SigninWithGoogleText(),
                     Gap(5.h),
-                 /*   InkWell(
+                    /*   InkWell(
                       onTap: () {
                         //TODO Implement google
                       },
@@ -383,7 +168,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                         height: 40.h,
                       ),
                     ), */
-                     const TermsAndConditionsText(),
+                    const TermsAndConditionsText(),
                     Gap(15.h),
                     const AlreadyHaveAccountText(),
                   ],
@@ -396,5 +181,3 @@ class LoginViewPage extends GetView<LoginViewController> {
     );
   }
 }
-
-

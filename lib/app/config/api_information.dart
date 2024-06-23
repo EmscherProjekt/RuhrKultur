@@ -4,7 +4,7 @@ class ApiInformation {
 
   // Auth Endpoints
   String auth = '/auth';
-  String login = 'login';
+  String login = '/login';
   String register = '/register';
 
   //Audio Endpoints

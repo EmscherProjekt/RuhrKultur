@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
-import 'package:ruhrkultur/app/routes/app_routes.dart';
-
-
 import '../../../controllers/onboard_view_controller.dart';
 
 class OnboardViewPage extends GetView<OnboardViewController> {
@@ -11,19 +8,16 @@ class OnboardViewPage extends GetView<OnboardViewController> {
 
   @override
   Widget build(BuildContext context) {
-    AuthenticationController authController = Get.find<AuthenticationController>();
-
-    // Using a Future.delayed to give time for the UI to build before navigating
-    Future.delayed(Duration.zero, () {
-      if (authController.isLogged.value) {
-        Get.offAllNamed(AppRoutes.HOME); // Replace the current route
-      } else {
-        Get.offAllNamed(AppRoutes.LOGIN_VIEW); // Replace the current route
-      }
+    // Ensure that navigation happens after the build phase
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AuthenticationController authController = Get.find<AuthenticationController>();
+      authController.goRightPage();
     });
 
-    return Center(
-      child: CircularProgressIndicator(), // You can show a loading indicator while navigating
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(), // Show a loading indicator while navigating
+      ),
     );
   }
 }
