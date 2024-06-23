@@ -5,19 +5,25 @@ import '../../../controllers/onboard_view_controller.dart';
 
 class OnboardViewPage extends GetView<OnboardViewController> {
   const OnboardViewPage({Key? key}) : super(key: key);
+  void init() async {
+    AuthenticationController authController =
+        Get.find<AuthenticationController>();
+    await authController.checkLoginStatus;
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Ensure that navigation happens after the build phase
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      AuthenticationController authController = Get.find<AuthenticationController>();
-      authController.goRightPage();
+    return Obx(() {
+      var controller = Get.find<AuthenticationController>();
+      controller.checkLoginStatus();
+      if (controller.isLogged.value) {
+        Get.offNamed('/home');
+      }
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     });
-
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(), // Show a loading indicator while navigating
-      ),
-    );
   }
 }

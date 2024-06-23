@@ -7,6 +7,7 @@ import 'package:ruhrkultur/app/data/models/register_request_model/register_reque
 import 'package:ruhrkultur/app/data/services/login_service.dart';
 import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+
 class LoginViewController extends GetxController {
   late final LoginService _loginService;
   late final AuthenticationController _authenticationController;
@@ -27,7 +28,8 @@ class LoginViewController extends GetxController {
 
   Future<void> loginUser(String email, String password) async {
     isLoading.value = true;
-    final response = await _loginService.fetchLogin(LoginRequestModel(email: email, password: password));
+    final response = await _loginService
+        .fetchLogin(LoginRequestModel(email: email, password: password));
     isLoading.value = false;
 
     if (response != null) {
@@ -46,8 +48,11 @@ class LoginViewController extends GetxController {
     }
   }
 
-  Future<void> registerUser(String firstName, String lastName, String username, String email, String password) async {
+  Future<void> registerUser(String firstName, String lastName, String username,
+      String email, String password) async {
     isLoading.value = true;
+    print(
+        'First Name: $firstName Last Name: $lastName Username: $username Email: $email Password: $password');
     final response = await _loginService.fetchRegister(RegisterRequestModel(
         firstName: firstName,
         lastName: lastName,
@@ -56,7 +61,7 @@ class LoginViewController extends GetxController {
         password: password));
     isLoading.value = false;
 
-    if (response?.error != null) {
+    if (response?.message == null) {
       Future.delayed(Duration.zero, () {
         AwesomeDialog(
           context: Get.context!,
@@ -69,7 +74,8 @@ class LoginViewController extends GetxController {
           },
         ).show();
       });
-    } else {
+    }
+    if (response?.message != null) {
       Future.delayed(Duration.zero, () {
         AwesomeDialog(
           context: Get.context!,

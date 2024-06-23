@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,8 +13,8 @@ import 'app/ui/theme/themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DependecyInjection.init();
   await GetStorage.init();
+  DependecyInjection.init();
   await RiveFile.initialize();
   await setupServiceLocator();
   runApp(const MyApp());
@@ -26,9 +25,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-   return ScreenUtilInit(
-      builder: (_,__) {
+    return ScreenUtilInit(
+      builder: (_, __) {
         return GetMaterialApp(
           title: 'Ruhkultur',
           debugShowCheckedModeBanner: false,
@@ -46,7 +44,7 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-     //! Must change it to true if you want to use the ScreenUtil
+      //! Must change it to true if you want to use the ScreenUtil
       designSize: const Size(411, 823),
     );
   }

@@ -9,13 +9,12 @@ class SplashViewPage extends GetView<SplashViewController> {
   final AuthenticationController authController =
       Get.put(AuthenticationController());
 
-  Future<void> initSettings() async {
-    // Add your initialization logic here
-    await Future.delayed(Duration(seconds: 2)); // Simulating some async work
+  void onInit() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _afterLayout(Get.context!));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  _afterLayout(BuildContext context) {
     return FutureBuilder(
       future: initSettings(),
       builder: (context, snapshot) {
@@ -30,6 +29,8 @@ class SplashViewPage extends GetView<SplashViewController> {
       },
     );
   }
+
+  Future<void> initSettings() async {}
 
   Scaffold errorView(AsyncSnapshot<Object?> snapshot) {
     return Scaffold(body: Center(child: Text('Error: ${snapshot.error}')));
@@ -51,6 +52,11 @@ class SplashViewPage extends GetView<SplashViewController> {
       ),
     ));
   }
+
+  @override
+  Widget build(BuildContext context) {
+    throw CircularProgressIndicator();
+  }
 }
 
 class OnboardViewPageWrapper extends StatefulWidget {
@@ -63,9 +69,12 @@ class _OnboardViewPageWrapperState extends State<OnboardViewPageWrapper> {
   void initState() {
     super.initState();
     // Schedule any state changes after the build phase
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Perform state changes here
-    });
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _afterLayout(Get.context!));
+  }
+
+  _afterLayout(BuildContext context) {
+    return OnboardViewPage();
   }
 
   @override

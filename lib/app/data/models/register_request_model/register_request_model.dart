@@ -4,9 +4,8 @@ class RegisterRequestModel {
   String? username;
   String? email;
   String? password;
-  String? message;
 
-  RegisterRequestModel({this.firstName, this.lastName, this.username, this.email, this.password, this.message});
+  RegisterRequestModel({this.firstName, this.lastName, this.username, this.email, this.password});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -15,7 +14,6 @@ class RegisterRequestModel {
     data['username'] = this.username;
     data['email'] = this.email;
     data['password'] = this.password;
-    data['message'] = this.message;
     return data;
   }
 }

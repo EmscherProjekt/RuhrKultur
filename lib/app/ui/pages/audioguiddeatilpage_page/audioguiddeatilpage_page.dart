@@ -19,7 +19,7 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
     pageManager.stop();
     pageManager.remove();
     pageManager.add();
- 
+
     return Scaffold(
       appBar: AppBar(
         title: Text(guide.audioName),
@@ -66,12 +66,12 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(guide.title,
+                                Text(guide.audioName,
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(height: 10),
-                                Text(guide.description),
+                                Text(guide.audioBeschreibung),
                               ],
                             ),
                           ),
@@ -84,14 +84,17 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                 Text('Audio Files:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                ListView.builder(
+                                Text(
+                                  "Currently not available",
+                                ),
+                                /*  ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: guide.audioGuidAudios.length,
                                   itemBuilder: (context, index) {
                                     return Text(guide.audioGuidAudios[index]);
                                   },
-                                ),
+                                ), */
                                 SizedBox(height: 10),
                                 Text('Images:',
                                     style:
@@ -99,23 +102,26 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  itemCount: guide.audioGuidImages.length,
+                                  itemCount: guide.imageUrl.length,
                                   itemBuilder: (context, index) {
-                                    return Text(guide.audioGuidImages[index]);
+                                    return Text(guide.imageUrl[index]);
                                   },
                                 ),
                                 SizedBox(height: 10),
                                 Text('Videos:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                ListView.builder(
+                                Text('Currently not available',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                /*   ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: guide.audioGuidVideos.length,
                                   itemBuilder: (context, index) {
                                     return Text(guide.audioGuidVideos[index]);
                                   },
-                                ),
+                                ), */
                               ],
                             ),
                           ),
@@ -128,14 +134,15 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                 Text('Licenses:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                ListView.builder(
+                                Text("Currently not available"),
+                                /*         ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: guide.audioGuidLizenzen.length,
                                   itemBuilder: (context, index) {
                                     return Text(guide.audioGuidLizenzen[index]);
                                   },
-                                ),
+                                ), */
                               ],
                             ),
                           ),
@@ -174,9 +181,7 @@ class PlayButton extends StatelessWidget {
             return IconButton(
               icon: const Icon(Icons.play_arrow),
               iconSize: 32.0,
-              onPressed: 
-                pageManager.play,
-              
+              onPressed: pageManager.play,
             );
           case ButtonState.playing:
             return IconButton(

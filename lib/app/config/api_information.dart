@@ -8,6 +8,7 @@ class ApiInformation {
   String register = '/register';
 
   //Audio Endpoints
-  String audio = 'audio/';
-  String getAudioSafe = 'getaudiosafe';
+  String audio = '/audio';
+  String getAudioSafe = '/allaudioguids';
+  String getAudio = '/';
 }
