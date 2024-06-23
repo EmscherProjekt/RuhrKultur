@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
+import 'package:ruhrkultur/app/data/emu/form_type.dart';
 import 'package:ruhrkultur/app/data/models/login_request_model/login_request_model.dart';
 import 'package:ruhrkultur/app/data/models/register_request_model/register_request_model.dart';
 import 'package:ruhrkultur/app/data/services/login_service.dart';
@@ -9,6 +12,8 @@ class LoginViewController extends GetxController {
   late final LoginService _loginService;
   late final AuthenticationController _authenticationController;
   RxBool isLoading = false.obs;
+  
+  Rx<FormType> formType = FormType.login.obs;
   @override
   void onInit() {
     isLoading.value = true;
@@ -17,11 +22,13 @@ class LoginViewController extends GetxController {
     _authenticationController = Get.put(AuthenticationController());
     isLoading.value = false;
   }
-
-  Future<void> loginUser(String username, String password) async {
+  Future<void> setFormType(FormType type) async {
+    formType.value = type;
+  }
+  Future<void> loginUser( String email, String password) async {
     isLoading.value = true;
     final response = await _loginService
-        .fetchLogin(LoginRequestModel(username: username, password: password));
+        .fetchLogin(LoginRequestModel(email: email, password: password));
 
     if (response != null) {
       /// Set isLogin to true
@@ -41,10 +48,10 @@ class LoginViewController extends GetxController {
   }
 
   Future<void> registerUser(
-      String username, String email, String password) async {
+     String firstName, String lastName, String username, String email, String password) async {
     isLoading.value = true;
     final response = await _loginService
-        .fetchRegister(RegisterRequestModel(username: username,email:  email, password: password));
+        .fetchRegister(RegisterRequestModel(firstName: firstName, lastName: lastName,  username: username,email:  email, password: password));
     if (response == null) {
       /// Set isLogin to true
       loginUser(username, password);

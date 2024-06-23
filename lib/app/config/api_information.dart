@@ -1,11 +1,11 @@
 class ApiInformation {
   // Base URL
-  String baseUrl = 'http://api.ruhrkulturerlebnis.de:8080/';
+  String baseUrl = 'http://api.ruhrkulturerlebnis.de';
 
   // Auth Endpoints
-  String auth = 'auth/';
-  String login = 'signin';
-  String register = 'signup';
+  String auth = '/auth';
+  String login = 'login';
+  String register = '/register';
 
   //Audio Endpoints
   String audio = 'audio/';

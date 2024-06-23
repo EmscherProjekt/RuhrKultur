@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_overlay_pro/loading_overlay_pro.dart';
+import 'package:ruhrkultur/app/data/emu/form_type.dart';
 import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/already_have_account_text.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/do_not_have_account.dart';
@@ -21,18 +22,22 @@ class LoginViewPage extends GetView<LoginViewController> {
   LoginViewPage({Key? key}) : super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey();
   LoginViewController get controller => Get.find<LoginViewController>();
+  final TextEditingController firstNameCtr = TextEditingController();
+  final TextEditingController lastNameCtr = TextEditingController();
   final TextEditingController emailCtr = TextEditingController();
   final TextEditingController passwordCtr = TextEditingController();
   final TextEditingController usernameCtr = TextEditingController();
-  Rx<FormType> formType = FormType.login.obs;
+
   final RiveAnimationControllerHelper riveHelper =
       RiveAnimationControllerHelper();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: Obx(() => formType.value == FormType.login
+        child: Obx(() => controller.formType == FormType.login
             ? _loginPage(context)
             : _registerPage(context)),
       ),
@@ -111,7 +116,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                   SizedBox(width: 5.0),
                   GestureDetector(
                     onTap: () {
-                      formType.value = FormType.register;
+                      controller.setFormType(FormType.register);
                     },
                     child: Text(
                       'Sign Up',
@@ -218,7 +223,7 @@ class LoginViewPage extends GetView<LoginViewController> {
               SizedBox(height: 15.0),
               ElevatedButton(
                 onPressed: () {
-                  controller.registerUser(
+                  controller.registerUser(firstNameCtr.text, lastNameCtr.text,
                       usernameCtr.text, emailCtr.text, passwordCtr.text);
                   Get.toNamed(AppRoutes.SPLASH_VIEW);
                 },
@@ -232,7 +237,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                   SizedBox(width: 5.0),
                   GestureDetector(
                     onTap: () {
-                      formType.value = FormType.login;
+                      controller.setFormType(FormType.login);
                     },
                     child: Text(
                       'Login',
@@ -366,19 +371,19 @@ class LoginViewPage extends GetView<LoginViewController> {
                       isSignUpPage: true,
                     ),
                     Gap(10.h),
-                    const SigninWithGoogleText(),
+                 //TODO:   const SigninWithGoogleText(),
                     Gap(5.h),
-                    InkWell(
+                 /*   InkWell(
                       onTap: () {
                         //TODO Implement google
                       },
                       child: SvgPicture.asset(
-                        'assets/svgs/google_logo.svg',
+                        'assets/svg/google_logo.svg',
                         width: 40.w,
                         height: 40.h,
                       ),
-                    ),
-                    const TermsAndConditionsText(),
+                    ), */
+                     const TermsAndConditionsText(),
                     Gap(15.h),
                     const AlreadyHaveAccountText(),
                   ],
@@ -392,4 +397,4 @@ class LoginViewPage extends GetView<LoginViewController> {
   }
 }
 
-enum FormType { login, register }
+

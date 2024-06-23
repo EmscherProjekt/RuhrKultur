@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:rive/rive.dart';
 import 'package:ruhrkultur/app/data/services/service_locator.dart';
 import 'app/data/services/dependency_injection.dart';
 import 'app/data/services/theme_service.dart';
@@ -15,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DependecyInjection.init();
   await GetStorage.init();
+  await RiveFile.initialize();
   await setupServiceLocator();
   runApp(const MyApp());
 }

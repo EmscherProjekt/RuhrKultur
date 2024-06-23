@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 import 'package:ruhrkultur/app/controllers/login_view_controller.dart';
 import 'package:ruhrkultur/app/routes/app_routes.dart';
+import 'package:ruhrkultur/app/ui/pages/login_view_page/login_view_page.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
 import 'package:ruhrkultur/app/ui/utils/app_regex.dart';
 import 'package:ruhrkultur/app/ui/utils/rive_controller.dart';
@@ -30,7 +31,9 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true;
   bool hasMinLength = false;
-
+  final TextEditingController firstNameCtr = TextEditingController();
+  final TextEditingController lastNameCtr = TextEditingController();
+  final TextEditingController usernameCtr = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -169,9 +172,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     super.initState();
-    riveHelper.loadRiveFile('assets/animation/headless_bear.riv').then((_) {
-      setState(() {});
-    });
+    riveHelper.loadRiveFile('assets/animation/headless_bear.riv').then((_) {});
     setupPasswordControllerListener();
     checkForPasswordFocused();
     checkForPasswordConfirmationFocused();
@@ -210,7 +211,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       return Column(
         children: [
           AppTextFormField(
-            hint: 'Name',
+            hint: 'FirstName',
             onChanged: (value) {
               if (value.isNotEmpty &&
                   value.length <= 13 &&
@@ -224,15 +225,62 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             },
             validator: (value) {
               String name = (value ?? '').trim();
-              nameController.text = name;
+              firstNameCtr.text = name;
               if (name.isEmpty) {
                 riveHelper.addFailController();
                 return 'Please enter a valid name';
               }
             },
-            controller: nameController,
+            controller: firstNameCtr,
           ),
-          SizedBox(height: 18.h)
+          SizedBox(height: 18.h),
+          AppTextFormField(
+            hint: 'LastName',
+            onChanged: (value) {
+              if (value.isNotEmpty &&
+                  value.length <= 13 &&
+                  riveHelper.isLookingLeft) {
+                riveHelper.addDownLeftController();
+              } else if (value.isNotEmpty &&
+                  value.length > 13 &&
+                  riveHelper.isLookingRight) {
+                riveHelper.addDownRightController();
+              }
+            },
+            validator: (value) {
+              String name = (value ?? '').trim();
+              lastNameCtr.text = name;
+              if (name.isEmpty) {
+                riveHelper.addFailController();
+                return 'Please enter a valid name';
+              }
+            },
+            controller: lastNameCtr,
+          ),
+          SizedBox(height: 18.h),
+          AppTextFormField(
+            hint: 'UserName',
+            onChanged: (value) {
+              if (value.isNotEmpty &&
+                  value.length <= 13 &&
+                  riveHelper.isLookingLeft) {
+                riveHelper.addDownLeftController();
+              } else if (value.isNotEmpty &&
+                  value.length > 13 &&
+                  riveHelper.isLookingRight) {
+                riveHelper.addDownRightController();
+              }
+            },
+            validator: (value) {
+              String name = (value ?? '').trim();
+              usernameCtr.text = name;
+              if (name.isEmpty) {
+                riveHelper.addFailController();
+                return 'Please enter a valid name';
+              }
+            },
+            controller: usernameCtr,
+          ),
         ],
       );
     }
@@ -248,8 +296,20 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         passwordFocuseNode.unfocus();
         passwordConfirmationFocuseNode.unfocus();
         if (formKey.currentState!.validate()) {
+          print("FirstName" +
+              firstNameCtr.text +
+              "lastName" +
+              lastNameCtr.text +
+              "username" +
+              usernameCtr.text +
+              "email" +
+              emailController.text +
+              "password" +
+              passwordController.text);
           controller.registerUser(
-            nameController.text,
+            firstNameCtr.text,
+            lastNameCtr.text,
+            usernameCtr.text,
             emailController.text,
             passwordController.text,
           );
@@ -353,11 +413,22 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         passwordConfirmationFocuseNode.unfocus();
         if (formKey.currentState!.validate()) {
           controller.registerUser(
-            nameController.text,
+            firstNameCtr.text,
+            lastNameCtr.text,
+            usernameCtr.text,
             emailController.text,
             passwordController.text,
           );
-          Get.toNamed(AppRoutes.SPLASH_VIEW);
+          print("FirstName" +
+              firstNameCtr.text +
+              "lastName" +
+              lastNameCtr.text +
+              "username" +
+              usernameCtr.text +
+              "email" +
+              emailController.text +
+              "password" +
+              passwordController.text);
         }
       },
     );
