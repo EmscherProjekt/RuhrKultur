@@ -19,6 +19,10 @@ class AudioGuideController extends GetxController {
     super.onInit();
   }
 
+  void setlevel() {
+    ApiService.setLevel(1);
+  }
+
   void fetchAudioGuides() async {
     try {
       isLoading(true);
