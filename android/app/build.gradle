@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.filmprojekt1.ruhrkulturerlebnisapp.reka"
-    compileSdk 34
+    compileSdk 30
     ndkVersion '26.1.10909125'
 
     compileOptions {
