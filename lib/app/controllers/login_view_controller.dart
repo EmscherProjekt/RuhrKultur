@@ -34,6 +34,7 @@ class LoginViewController extends GetxController {
 
     if (response != null) {
       _authenticationController.login(response.token);
+      Get.offNamed(AppRoutes.SPLASH_VIEW);
     } else {
       Future.delayed(Duration.zero, () {
         Get.defaultDialog(

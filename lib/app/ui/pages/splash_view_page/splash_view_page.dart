@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
+import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:ruhrkultur/app/ui/pages/onboard_view_page/onboard_view_page.dart';
 import '../../../controllers/splash_view_controller.dart';
 
@@ -9,34 +10,16 @@ class SplashViewPage extends GetView<SplashViewController> {
   final AuthenticationController authController =
       Get.put(AuthenticationController());
 
-  void onInit() {
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _afterLayout(Get.context!));
+  void onInit() async {
+   await authController.checkLoginStatus;
+   authController.isLogged.value
+        ? Get.offNamed(AppRoutes.HOME)
+        : Get.offNamed(AppRoutes.LOGIN_VIEW);
   }
 
-  _afterLayout(BuildContext context) {
-    return FutureBuilder(
-      future: initSettings(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return waitingView();
-        } else {
-          if (snapshot.hasError)
-            return errorView(snapshot);
-          else
-            return OnboardViewPageWrapper();
-        }
-      },
-    );
-  }
-
-  Future<void> initSettings() async {}
-
-  Scaffold errorView(AsyncSnapshot<Object?> snapshot) {
-    return Scaffold(body: Center(child: Text('Error: ${snapshot.error}')));
-  }
-
-  Scaffold waitingView() {
+  @override
+  Widget build(BuildContext context) {
+    onInit();
     return Scaffold(
         body: Center(
       child: Column(
@@ -51,11 +34,6 @@ class SplashViewPage extends GetView<SplashViewController> {
         ],
       ),
     ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    throw CircularProgressIndicator();
   }
 }
 
