@@ -5,17 +5,14 @@ import 'package:ruhrkultur/app/ui/layouts/main/widgets/already_have_account_text
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/do_not_have_account.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/login_signup_animated_form.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/progress_indicaror.dart';
-import 'package:ruhrkultur/app/ui/layouts/main/widgets/sign_in_with_google_text.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/terms_and_conditions_text.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
 import 'package:ruhrkultur/app/ui/utils/rive_controller.dart';
 import '../../../controllers/login_view_controller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-// ignore: must_be_immutable
 class LoginViewPage extends GetView<LoginViewController> {
   LoginViewPage({Key? key}) : super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -34,9 +31,13 @@ class LoginViewPage extends GetView<LoginViewController> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: Obx(() => controller.formType == FormType.login
-            ? _loginPage(context)
-            : _registerPage(context)),
+        child: Obx(() {
+          // Ensure state updates are not within the build method
+          final formType = controller.formType.value;
+          return formType == FormType.login
+              ? _loginPage(context)
+              : _registerPage(context);
+        }),
       ),
     );
   }
@@ -148,10 +149,13 @@ class LoginViewPage extends GetView<LoginViewController> {
               ),
               Gap(8.h),
               Obx(() {
+                if (controller.isLoading.value) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ProgressIndicaror.showProgressIndicator(context);
+                  });
+                }
                 return Column(
                   children: [
-                    if (controller.isLoading.value)
-                      ProgressIndicaror.showProgressIndicator(context),
                     EmailAndPassword(
                       isSignUpPage: true,
                     ),

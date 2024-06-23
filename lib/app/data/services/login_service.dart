@@ -34,14 +34,16 @@ class LoginService extends GetConnect {
       RegisterRequestModel model) async {
     final url = api.baseUrl + api.auth + api.register;
     print(url);
-    
-    final response =
-        await post(url, model.toJson());
+
+    final response = await post(url, model.toJson());
     print(response.body);
-    if (response.statusCode == HttpStatus.ok) {
-      return RegisterResponseModel.fromJson(response.body);
-    } else {
-      return null;
+    switch (response.statusCode) {
+      case 201:
+        return RegisterResponseModel.fromJson(response.body);
+      case 500:
+        return RegisterResponseModel.fromJson(response.body);
+      default:
+        return RegisterResponseModel(error: "Error occured!");
     }
   }
 }
