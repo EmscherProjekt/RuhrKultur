@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_overlay_pro/loading_overlay_pro.dart';
+import 'package:ruhrkultur/app/routes/app_routes.dart';
+import 'package:ruhrkultur/app/ui/layouts/main/widgets/already_have_account_text.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/do_not_have_account.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/login_signup_animated_form.dart';
+import 'package:ruhrkultur/app/ui/layouts/main/widgets/progress_indicaror.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/sign_in_with_google_text.dart';
 import 'package:ruhrkultur/app/ui/layouts/main/widgets/terms_and_conditions_text.dart';
+import 'package:ruhrkultur/app/ui/theme/styles.dart';
+import 'package:ruhrkultur/app/ui/utils/rive_controller.dart';
 import '../../../controllers/login_view_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 // ignore: must_be_immutable
 class LoginViewPage extends GetView<LoginViewController> {
@@ -17,7 +25,8 @@ class LoginViewPage extends GetView<LoginViewController> {
   final TextEditingController passwordCtr = TextEditingController();
   final TextEditingController usernameCtr = TextEditingController();
   Rx<FormType> formType = FormType.login.obs;
-
+  final RiveAnimationControllerHelper riveHelper =
+      RiveAnimationControllerHelper();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +34,7 @@ class LoginViewPage extends GetView<LoginViewController> {
         padding: EdgeInsets.symmetric(horizontal: 12.0),
         child: Obx(() => formType.value == FormType.login
             ? _loginPage(context)
-            : registerForm(context)),
+            : _registerPage(context)),
       ),
     );
   }
@@ -211,6 +220,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                 onPressed: () {
                   controller.registerUser(
                       usernameCtr.text, emailCtr.text, passwordCtr.text);
+                  Get.toNamed(AppRoutes.SPLASH_VIEW);
                 },
                 child: Text('Register'),
               ),
@@ -311,7 +321,7 @@ class LoginViewPage extends GetView<LoginViewController> {
                   //TODO Immplent google
                 },
                 child: SvgPicture.asset(
-                  'assets/svgs/google_logo.svg',
+                  'assets/svg/google_logo.svg',
                   width: 40,
                   height: 40,
                 ),
@@ -319,6 +329,61 @@ class LoginViewPage extends GetView<LoginViewController> {
               const TermsAndConditionsText(),
               const SizedBox(height: 5),
               const DoNotHaveAccountText(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SafeArea _registerPage(BuildContext context) {
+    final LoginViewController controller = Get.put(LoginViewController());
+
+    return SafeArea(
+      child: Padding(
+        padding:
+            EdgeInsets.only(left: 30.w, right: 30.w, bottom: 15.h, top: 5.h),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Create Account',
+                style: TextStyles.font24Blue700Weight,
+              ),
+              Gap(8.h),
+              Text(
+                'Sign up now and start exploring all that our\napp has to offer. We\'re excited to welcome\nyou to our community!',
+                style: TextStyles.font14Grey400Weight,
+              ),
+              Gap(8.h),
+              Obx(() {
+                return Column(
+                  children: [
+                    if (controller.isLoading.value)
+                      ProgressIndicaror.showProgressIndicator(context),
+                    EmailAndPassword(
+                      isSignUpPage: true,
+                    ),
+                    Gap(10.h),
+                    const SigninWithGoogleText(),
+                    Gap(5.h),
+                    InkWell(
+                      onTap: () {
+                        //TODO Implement google
+                      },
+                      child: SvgPicture.asset(
+                        'assets/svgs/google_logo.svg',
+                        width: 40.w,
+                        height: 40.h,
+                      ),
+                    ),
+                    const TermsAndConditionsText(),
+                    Gap(15.h),
+                    const AlreadyHaveAccountText(),
+                  ],
+                );
+              }),
             ],
           ),
         ),

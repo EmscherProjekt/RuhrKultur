@@ -21,7 +21,7 @@ class ApiService {
   }
 
   static Future<List<AudioGuide>> fetchAudioGuidesSafe() async {
-    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/api/v2/a?userLatitude=1&userLongitude=1");
+    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/api/audio_guid?userLatitude=1&userLongitude=1");
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
     
     if (response.statusCode == 200) {

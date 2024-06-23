@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 import 'package:ruhrkultur/app/controllers/login_view_controller.dart';
+import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
 import 'package:ruhrkultur/app/ui/utils/app_regex.dart';
 import 'package:ruhrkultur/app/ui/utils/rive_controller.dart';
@@ -136,11 +137,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 riveHelper.addFailController();
                 return 'Please enter an email address';
               }
-
-              if (!AppRegex.isEmailValid(email)) {
-                riveHelper.addFailController();
-                return 'Please enter a valid email address';
-              }
             },
             controller: emailController,
           ),
@@ -190,6 +186,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         passwordFocuseNode.unfocus();
         if (formKey.currentState!.validate()) {
           controller.loginUser(emailController.text, passwordController.text);
+          Get.toNamed(AppRoutes.SPLASH_VIEW);
         }
       },
     );
@@ -360,6 +357,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             emailController.text,
             passwordController.text,
           );
+          Get.toNamed(AppRoutes.SPLASH_VIEW);
         }
       },
     );

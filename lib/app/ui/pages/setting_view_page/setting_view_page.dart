@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:about/about.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
+import 'package:ruhrkultur/app/routes/app_routes.dart';
 
 class SettingViewPage extends StatefulWidget {
   const SettingViewPage({super.key});
@@ -165,6 +167,13 @@ class _SettingsPageState extends State<SettingViewPage> {
                   _showLanguageSelectionDialog();
                 },
               ),
+              _CustomListTile(
+                  title: 'Log out',
+                  icon: Icons.logout,
+                  onTap: () {
+                    AuthenticationController().logOut();
+                    Get.toNamed(AppRoutes.SPLASH_VIEW);
+                  }),
             ],
           ),
         ],

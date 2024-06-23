@@ -18,28 +18,30 @@ class AudioguidPage extends GetView {
     AudioGuideController controller = Get.put(AudioGuideController());
 
     return Center(
-      child: Obx(
-        () {
-          if (controller.isLoading.value) {
-            return Center(child: CircularProgressIndicator());
-          } else if (controller.audioGuides.isEmpty) {
-            return Center(
-                child: Center(
-              child: Column(
-                children: [
-                  Text("No data found."),
-                  TextButton(
-                      onPressed: () {
-                        _loadData();
-                      },
-                      child: Text("No data found, tap to reload.")),
-                ],
-              ),
-            ));
-          } else {
-            return RefreshIndicator(
-              onRefresh: _loadData,
-              child: ListView.builder(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          await _loadData();
+        },
+        child: Obx(
+          () {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            } else if (controller.audioGuides.isEmpty) {
+              return Center(
+                  child: Center(
+                child: Column(
+                  children: [
+                    Text("No data found."),
+                    TextButton(
+                        onPressed: () {
+                          _loadData();
+                        },
+                        child: Text("No data found, tap to reload.")),
+                  ],
+                ),
+              ));
+            } else {
+              return ListView.builder(
                 itemCount: controller.audioGuides.length,
                 itemBuilder: (context, index) {
                   final guide = controller.audioGuides[index];
@@ -128,10 +130,10 @@ class AudioguidPage extends GetView {
                     ),
                   );
                 },
-              ),
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }

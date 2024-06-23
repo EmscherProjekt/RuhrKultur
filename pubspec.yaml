@@ -32,6 +32,8 @@ dependencies:
   flutter_archive: ^6.0.3
   rive: ^0.13.8
   flutter_svg: ^2.0.10+1
+  awesome_dialog: ^3.2.1
+  gap: ^3.0.1
 
 
 
@@ -66,4 +68,5 @@ flutter:
     - assets/icons/
     - assets/image/
     - assets/animation/
+    - assets/svg/
   uses-material-design: true
