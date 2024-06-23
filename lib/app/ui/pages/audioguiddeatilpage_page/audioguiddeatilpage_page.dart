@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/audio_player_controller.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
-import 'package:ruhrkultur/app/data/models/audioguid/audioguid.dart';
+import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/service_locator.dart';
 

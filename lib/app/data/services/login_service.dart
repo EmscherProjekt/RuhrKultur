@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:ruhrkultur/app/config/api_information.dart';
 import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
-import 'package:ruhrkultur/app/data/models/login_request_model/login_request_model.dart';
-import 'package:ruhrkultur/app/data/models/login_response_model/login_response_model.dart';
-import 'package:ruhrkultur/app/data/models/register_request_model/register_request_model.dart';
-import 'package:ruhrkultur/app/data/models/register_respone_modeldart/register_respone_model.dart';
+import 'package:ruhrkultur/app/data/models/request/login_request_model.dart';
+import 'package:ruhrkultur/app/data/models/response/login_response_model.dart';
+import 'package:ruhrkultur/app/data/models/request/register_request_model.dart';
+import 'package:ruhrkultur/app/data/models/response/register_respone_model.dart';
 
 class LoginService extends GetConnect {
   final api = ApiInformation();

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/config/api_information.dart';
-import 'package:ruhrkultur/app/data/models/audioguid/audioguid.dart';
+import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:ruhrkultur/app/routes/app_routes.dart';

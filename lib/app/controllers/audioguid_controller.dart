@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ruhrkultur/app/data/models/audioguid/audioguid.dart';
+import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
 
 class AudioGuideController extends GetxController {
