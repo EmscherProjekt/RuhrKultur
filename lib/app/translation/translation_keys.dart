@@ -29,8 +29,27 @@ const settings_app_info = 'settings_app_info';
 const settings_app_change_log = 'settings_app_change_log';
 
 //Auth
+const auth_login = 'auth_login';
 
 //AlreadyHaveAccountText
 const auth_already_have_account = 'auth_already_have_account';
 const auth_already_have_account_login = 'auth_already_have_account_login';
+
+//DoNotHaveAccountText
+const auth_do_not_have_account = 'auth_do_not_have_account';
+const auth_do_not_have_account_sign_up = 'auth_do_not_have_account_sign_up';
+
+//Email
+const auth_email = 'auth_email';
+const auth_email_error = 'auth_email_error';
+
+//ForgotPassword
+const auth_forgot_password = 'auth_forgot_password';
+
+//CreatePassword
+const auth_create_password = 'auth_create_password';
+
+//Register
+const auth_regster_titel = 'auth_regster_titel';
+
 
