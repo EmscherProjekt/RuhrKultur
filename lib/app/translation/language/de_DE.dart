@@ -24,5 +24,7 @@ class deDE {
         translation.settings_about_page__description : 'Das Ruhrgebiet neu entdecken',
         translation.settings_app_info : 'App Info',
         translation.settings_app_change_log : 'Änderungsprotokoll',
+
+
       };
 }
