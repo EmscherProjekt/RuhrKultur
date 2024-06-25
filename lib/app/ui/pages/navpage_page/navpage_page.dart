@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import '../../layouts/main/main_layout.dart';
 
 import '../../../controllers/navpage_controller.dart';
