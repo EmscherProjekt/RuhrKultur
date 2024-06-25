@@ -15,6 +15,8 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
   Widget build(BuildContext context) {
     AudioGuideController controller = Get.find();
     AudioGuide guide = controller.selectedGuide.value;
+    print("AudioGuideDetailPage");
+    print(guide.audioName);
     final PageManager pageManager = PageManager();
     pageManager.stop();
     pageManager.remove();

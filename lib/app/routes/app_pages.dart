@@ -1,3 +1,7 @@
+import '../bindings/funktion_aktivert_binding.dart';
+import '../ui/pages/funktion_aktivert_page/funktion_aktivert_page.dart';
+      import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
+
 import '../bindings/navpage_binding.dart';
 import '../ui/pages/navpage_page/navpage_page.dart';
       import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
@@ -5,7 +9,7 @@ import '../ui/pages/navpage_page/navpage_page.dart';
 import '../bindings/setting_view_binding.dart';
 import '../ui/pages/setting_view_page/setting_view_page.dart';
       import '../bindings/audioguiddeatilpage_binding.dart';
-import '../ui/pages/audioguid_page/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
+import '../ui/pages/audioguid_page/widgets/audioguiddeatilpage_page.dart';
       import '../bindings/audioguid_binding.dart';
 import '../ui/pages/audioguid_page/audioguid_page.dart';
 
@@ -36,7 +40,7 @@ class AppPages {
     unknownRoutePage,
     GetPage(
       name: AppRoutes.HOME,
-      page: () => NavigationBottomBar(),
+      page: () =>HomePage(),
       binding: HomeBinding(),
       transition: _defaultTransition,
     ),
@@ -80,6 +84,12 @@ class AppPages {
       name: AppRoutes.NAVPAGE,
       page: () => const NavpagePage(),
       binding: NavpageBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.FUNKTION_AKTIVERT,
+      page: () => const FunktionAktivertPage(),
+      binding: FunktionAktivertBinding(),
       transition: _defaultTransition,
     ), 
 ];

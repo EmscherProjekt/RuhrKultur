@@ -34,6 +34,9 @@ dependencies:
   flutter_svg: ^2.0.10+1
   awesome_dialog: ^3.2.1
   gap: ^3.0.1
+  responsive_framework: ^1.4.0
+  flutter_modular: ^6.3.4
+  posthog_flutter: ^4.5.0
 
 
 

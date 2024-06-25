@@ -38,4 +38,5 @@ class NavpagePage extends GetView<NavpageController> {
       ),
     );
   }
+  
 }

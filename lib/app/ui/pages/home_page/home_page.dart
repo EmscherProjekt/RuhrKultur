@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
 import '../../../controllers/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -11,7 +10,7 @@ class HomePage extends GetView<HomeController> {
       body: Center(
         child: Text("Hallo"),
       ),
-      bottomNavigationBar: NavigationBottomBar(),
+    
     );
   }
 }

@@ -11,4 +11,5 @@
   static const SETTING_VIEW = '/setting-view';
 
   static const NAVPAGE = '/navpage';
+  static const FUNKTION_AKTIVERT = '/funktion-aktivert';
 }
