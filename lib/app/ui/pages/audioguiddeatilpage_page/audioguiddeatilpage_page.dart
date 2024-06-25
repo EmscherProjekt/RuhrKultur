@@ -52,9 +52,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                   children: [
                     TabBar(
                       tabs: [
-                        Tab(text: 'Content'),
-                        Tab(text: 'Media'),
-                        Tab(text: 'Quellen'),
+                        Tab(text: 'audio_page_detail_tab_content'.tr),
+                        Tab(text: 'audio_page_detail_tab_media'.tr),
+                        Tab(text: 'audio_page_detail_tab_sources'.tr),
                       ],
                     ),
                     Expanded(

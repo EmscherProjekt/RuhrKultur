@@ -3,7 +3,7 @@
 //Navigation
 const navigation_bar_home = 'navigation_bar_home';
 const navigation_bar_settings = 'navigation_bar_settings';
-
+const navigation_bar_audioguid = 'navigation_bar_audioguid';
 //Audio
 const audio_player_current_song = 'audio_player_current_song';
 const audio_player_current_description = 'audio_player_current_description';
@@ -52,4 +52,51 @@ const auth_create_password = 'auth_create_password';
 //Register
 const auth_regster_titel = 'auth_regster_titel';
 
+//FirstName
+const auth_regster_firstName = 'auth_regster_firstName';
+const auth_regster_firstName_error = 'auth_regster_firstName_error';
+
+//LastName
+const auth_regster_lastName = 'auth_regster_lastName';
+const auth_regster_lastName_error = 'auth_regster_lastName_error';
+
+//Username
+const auth_regster_username = 'auth_regster_username';
+const auth_regster_username_erro = 'auth_regster_username_erro';
+
+//Password Retype
+const auth_regster_password_retype = 'auth_regster_password_retype';
+const auth_regster_password_retype_error = 'auth_regster_password_retype_error';
+const auth_regster_password_retype_error_notMatch = 'auth_regster_password_retype_error_nnot_match';
+
+//Password
+const auth_regster_password = 'auth_regster_password';
+const auth_regster_password_error = 'auth_regster_password_retype__error';
+
+//Password Validation
+const auth_regster_password_validation_minLength = 'auth_regster_password_validation_minLength';
+
+//SignInWithText
+const auth_sign_in_with = 'auth_sign_in_with';
+
+//TermsAndConditionss
+const auth_terms_and_conditions_one = 'auth_terms_and_conditions_one';
+const auth_terms_and_conditions_two = 'auth_terms_and_conditions_two';
+const auth_terms_and_conditions_three = 'auth_terms_and_conditions_three';
+const auth_terms_and_conditions_four = 'auth_terms_and_conditions_four';
+
+//AudioPage
+
+//NoDataFound
+const audio_page_no_data_found = 'audio_page_no_data_found';
+const audio_page_no_data_found_info = 'audio_page_no_data_found_info';
+
+//Card
+const audio_page_card_merken = 'audio_page_card_merken';
+const audio_page_card_to_audioguid = 'audio_page_card_to_audioguid';
+
+//AudioPageDetail
+const audio_page_detail_tab_content = 'audio_page_detail_tab_content';
+const audio_page_detail_tab_media = 'audio_page_detail_tab_media';
+const audio_page_detail_tab_sources = 'audio_page_detail_tab_sources';
 

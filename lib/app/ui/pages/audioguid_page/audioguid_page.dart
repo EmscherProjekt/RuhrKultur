@@ -31,12 +31,14 @@ class AudioguidPage extends GetView {
                   child: Center(
                 child: Column(
                   children: [
-                    Text("No data found."),
+                    Text("audio_page_no_data_found".tr,
+                        style: TextStyle(fontSize: 20)),
                     TextButton(
                         onPressed: () {
                           _loadData();
                         },
-                        child: Text("No data found, tap to reload.")),
+                        child: Text("audio_page_no_data_found_info".tr,
+                            style: TextStyle(fontSize: 20))),
                   ],
                 ),
               ));
@@ -94,8 +96,8 @@ class AudioguidPage extends GetView {
                                     onPressed: () {
                                       
                                     },
-                                    child: const Text(
-                                      "Merken",
+                                    child:  Text(
+                                      "audio_page_card_merken".tr,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -116,8 +118,8 @@ class AudioguidPage extends GetView {
                                       
                                       Get.to(() => AudioguiddeatilpagePage());
                                     },
-                                    child: const Text(
-                                      "Zum Guid",
+                                    child:  Text(
+                                      "audio_page_card_to_audioguid",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,

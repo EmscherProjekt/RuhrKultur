@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
 
 class TermsAndConditionsText extends StatelessWidget {
@@ -12,20 +13,20 @@ class TermsAndConditionsText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'By logging, you agree to our',
+            text: 'auth_terms_and_conditions_one'.tr,
             style: TextStyles.font11MediumLightShadeOfGray400Weight,
           ),
           TextSpan(
-            text: ' Terms & Conditions',
+            text: ' auth_terms_and_conditions_two'.tr,
             style: TextStyles.font11DarkBlue500Weight,
           ),
           TextSpan(
-            text: ' and',
+            text: ' auth_terms_and_conditions_three'.tr,
             style: TextStyles.font11MediumLightShadeOfGray400Weight
                 .copyWith(height: 4.h),
           ),
           TextSpan(
-            text: ' PrivacyPolicy.',
+            text: ' auth_terms_and_conditions_four'.tr,
             style: TextStyles.font11DarkBlue500Weight,
           ),
         ],

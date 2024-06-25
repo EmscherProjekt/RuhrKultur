@@ -30,7 +30,7 @@ class NavigationBottomBar extends GetView<NavigationController> {
               NavigationDestination(
                 selectedIcon: const Icon(Icons.audiotrack),
                 icon: const Icon(Icons.audiotrack_outlined),
-                label: 'AudioGuid',
+                label: 'navigation_bar_audioguid'.tr,
               ),
               NavigationDestination(
                 selectedIcon: Icon(Icons.settings),

@@ -210,7 +210,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   AppTextButton passwordButton(
       BuildContext context, LoginViewController controller) {
     return AppTextButton(
-      buttonText: "Create Password",
+      buttonText: "auth_create_password".tr,
       textStyle: TextStyles.font16White600Weight,
       onPressed: () async {
         passwordFocuseNode.unfocus();
@@ -231,7 +231,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   AppTextButton signUpButton(
       BuildContext context, LoginViewController controller) {
     return AppTextButton(
-      buttonText: "Create Account",
+      buttonText: "auth_regster_titel".tr,
       textStyle: TextStyles.font16White600Weight,
       onPressed: () async {
         passwordFocuseNode.unfocus();
@@ -268,7 +268,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       return Column(
         children: [
           AppTextFormField(
-            hint: 'FirstName',
+            hint: 'auth_regster_firstName'.tr,
             onChanged: (value) {
               if (value.isNotEmpty &&
                   value.length <= 13 &&
@@ -285,7 +285,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               firstNameCtr.text = name;
               if (name.isEmpty) {
                 riveHelper.addFailController();
-                return 'Please enter a valid name';
+                return 'auth_regster_firstName_error'.tr;
               }
               return null; // Return null if no error
             },
@@ -293,7 +293,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           SizedBox(height: 18.h),
           AppTextFormField(
-            hint: 'LastName',
+            hint: 'auth_regster_lastName'.tr,
             onChanged: (value) {
               if (value.isNotEmpty &&
                   value.length <= 13 &&
@@ -310,7 +310,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               lastNameCtr.text = name;
               if (name.isEmpty) {
                 riveHelper.addFailController();
-                return 'Please enter a valid name';
+                return 'auth_regster_lastName_error'.tr;
               }
               return null; // Return null if no error
             },
@@ -318,7 +318,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           SizedBox(height: 18.h),
           AppTextFormField(
-            hint: 'UserName',
+            hint: 'auth_regster_username'.tr,
             onChanged: (value) {
               if (value.isNotEmpty &&
                   value.length <= 13 &&
@@ -335,7 +335,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               usernameCtr.text = name;
               if (name.isEmpty) {
                 riveHelper.addFailController();
-                return 'Please enter a valid name';
+                return 'auth_regster_username_erro'.tr;
               }
               return null; // Return null if no error
             },
@@ -352,7 +352,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       return AppTextFormField(
         focusNode: passwordConfirmationFocuseNode,
         controller: passwordConfirmationController,
-        hint: 'Password Confirmation',
+        hint: 'auth_regster_password_retype'.tr,
         isObscureText: isObscureText,
         suffixIcon: GestureDetector(
           onTap: () {
@@ -375,13 +375,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         validator: (value) {
           if (value != passwordController.text) {
             riveHelper.addFailController();
-            return 'Enter a matched passwords';
+            return 'auth_regster_password_retype_error_not_match'.tr;
           }
           if (value == null ||
               value.isEmpty ||
               !AppRegex.isPasswordValid(value)) {
             riveHelper.addFailController();
-            return 'Please enter a valid password';
+            return 'auth_regster_password_retype_error'.tr;
           }
           return null; // Return null if no error
         },
@@ -394,7 +394,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     return AppTextFormField(
       focusNode: passwordFocuseNode,
       controller: passwordController,
-      hint: 'Password',
+      hint: 'auth_regster_password'.tr,
       isObscureText: isObscureText,
       suffixIcon: GestureDetector(
         onTap: () {
@@ -419,7 +419,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             value.isEmpty ||
             !AppRegex.isPasswordValid(value)) {
           riveHelper.addFailController();
-          return 'Please enter a valid password';
+          return 'auth_regster_password_error'.tr;
         }
         return null; // Return null if no error
       },

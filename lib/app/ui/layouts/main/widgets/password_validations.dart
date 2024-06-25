@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:ruhrkultur/app/ui/theme/colors.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
@@ -11,7 +12,7 @@ class PasswordValidations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildValidationRow('At least 6 characters', hasMinLength);
+    return buildValidationRow('auth_regster_password_validation_minLength'.tr, hasMinLength);
   }
 
   Widget buildValidationRow(String text, bool hasValidated) {

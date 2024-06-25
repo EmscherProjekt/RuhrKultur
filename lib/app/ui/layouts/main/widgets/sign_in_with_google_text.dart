@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ruhrkultur/app/ui/theme/styles.dart';
 
 class SigninWithGoogleText extends StatelessWidget {
@@ -13,7 +14,7 @@ class SigninWithGoogleText extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'or Sign in with',
+          'auth_sign_in_with'.tr,
           style: TextStyles.font13Grey400Weight,
         ),
       ],
