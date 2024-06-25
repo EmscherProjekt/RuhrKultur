@@ -10,4 +10,5 @@
   static const AUDIOGUIDDEATILPAGE = '/audioguiddeatilpage';
   static const SETTING_VIEW = '/setting-view';
 
+  static const NAVPAGE = '/navpage';
 }

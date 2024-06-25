@@ -1,10 +1,11 @@
-
+import '../bindings/navpage_binding.dart';
+import '../ui/pages/navpage_page/navpage_page.dart';
       import 'package:ruhrkultur/app/ui/layouts/main/widgets/navigation_bottom_bar.dart';
 
 import '../bindings/setting_view_binding.dart';
 import '../ui/pages/setting_view_page/setting_view_page.dart';
       import '../bindings/audioguiddeatilpage_binding.dart';
-import '../ui/pages/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
+import '../ui/pages/audioguid_page/audioguiddeatilpage_page/audioguiddeatilpage_page.dart';
       import '../bindings/audioguid_binding.dart';
 import '../ui/pages/audioguid_page/audioguid_page.dart';
 
@@ -75,6 +76,11 @@ class AppPages {
       binding: SettingViewBinding(),
       transition: _defaultTransition,
     ),
-
+    GetPage(
+      name: AppRoutes.NAVPAGE,
+      page: () => const NavpagePage(),
+      binding: NavpageBinding(),
+      transition: _defaultTransition,
+    ), 
 ];
 }

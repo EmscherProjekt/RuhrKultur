@@ -12,39 +12,6 @@ class NavigationBottomBar extends GetView<NavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: navigationController,
-      builder: (_) => Scaffold(
-          bottomNavigationBar: NavigationBar(
-            onDestinationSelected: (int index) {
-              navigationController.changePageIndex(index);
-            },
-            indicatorColor: Colors.amber,
-            selectedIndex: navigationController.currentIndex.value,
-            destinations: <Widget>[
-              NavigationDestination(
-                selectedIcon: const Icon(Icons.home),
-                icon: const Icon(Icons.home_outlined),
-                label: 'navigation_bar_home'.tr,
-              ),
-              NavigationDestination(
-                selectedIcon: const Icon(Icons.audiotrack),
-                icon: const Icon(Icons.audiotrack_outlined),
-                label: 'navigation_bar_audioguid'.tr,
-              ),
-              NavigationDestination(
-                selectedIcon: Icon(Icons.settings),
-                icon: const Icon(Icons.settings_outlined),
-                label: 'navigation_bar_settings'.tr,
-              ),
-            ],
-          ),
-          body: <Widget>[
-            // New AudioGuid
-            HomePage(),
-            AudioguidPage(),
-           SettingViewPage(),
-          ][navigationController.currentIndex.value]),
-    );
+    return Placeholder();
   }
 }

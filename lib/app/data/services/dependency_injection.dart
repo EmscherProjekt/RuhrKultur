@@ -1,8 +1,10 @@
-import '../../controllers/navigation_controller.dart';
-import '../../controllers/main_controller.dart';
+import 'package:ruhrkultur/app/controllers/main_controller.dart';
+import 'package:ruhrkultur/app/controllers/navigation_controller.dart';
+import 'package:ruhrkultur/firebase_options.dart';
+
 
 import 'package:firebase_core/firebase_core.dart';
-import '../../../firebase_options.dart';
+
 
 import 'package:get/get.dart';
 
