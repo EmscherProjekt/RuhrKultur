@@ -13,7 +13,7 @@ class SplashViewPage extends GetView<SplashViewController> {
   void onInit() async {
    await authController.checkLoginStatus;
    authController.isLogged.value
-        ? Get.offNamed(AppRoutes.HOME)
+        ? Get.offNamed(AppRoutes.NAVPAGE)
         : Get.offNamed(AppRoutes.LOGIN_VIEW);
   }
 
