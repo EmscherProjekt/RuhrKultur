@@ -19,7 +19,7 @@ class ApiService {
 
   static Future<List<AudioGuide>> fetchAudioGuides() async {
     final api = ApiInformation();
-    var url = Uri.parse(api.baseUrl+api.audio+"?userLatitude=1&userLongitude=1");
+    var url = Uri.parse(api.baseUrl+api.audio);
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     print(response.body);
