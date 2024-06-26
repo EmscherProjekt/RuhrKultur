@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:media_kit/media_kit.dart';                      // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart';       
+  import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 
 
 class VideoDetailScreen extends StatefulWidget {
