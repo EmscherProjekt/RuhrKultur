@@ -4,27 +4,24 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.dart';
 
-class AudioguidPage extends GetView {
+class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
 
   void onInit() {
     _loadData();
   }
 
-  Future<void> _loadData() async {
-    Get.find<AudioGuideController>().fetchAudioGuidesSafe();
-  }
+  Future<void> _loadData() async {}
 
   @override
   Widget build(BuildContext context) {
-    AudioGuideController controller = Get.put(AudioGuideController());
-
+    AudioController controller = Get.find<AudioController>();
     return ResponsiveBreakpoints(
       breakpoints: [
-          Breakpoint(start: 0, end: 480, name: MOBILE),
-          Breakpoint(start: 481, end: 1200, name: TABLET),
-          Breakpoint(start: 1201, end: double.infinity, name: DESKTOP),
-        ],
+        Breakpoint(start: 0, end: 480, name: MOBILE),
+        Breakpoint(start: 481, end: 1200, name: TABLET),
+        Breakpoint(start: 1201, end: double.infinity, name: DESKTOP),
+      ],
       child: Scaffold(
         body: Container(
           child: Center(
@@ -57,11 +54,8 @@ class AudioguidPage extends GetView {
                     child: ListView.builder(
                         itemCount: controller.audioGuides.length,
                         itemBuilder: (context, index) {
-                          final guide = controller.audioGuides[index];
-                          return AudioguidCard(
-                            audioGuideController: controller,
-                            audioGuide: guide,
-                          );
+                          controller.audioGuides[index];
+                          return AudioguidCard();
                         }),
                   );
                 }

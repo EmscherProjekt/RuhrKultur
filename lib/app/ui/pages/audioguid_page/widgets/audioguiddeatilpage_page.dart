@@ -7,24 +7,23 @@ import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/service_locator.dart';
 
-class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
-  AudioguiddeatilpagePage({Key? key}) : super(key: key);
+class AudioguiddeatilpagePage extends GetView<AudioController> {
+ 
+
+  const AudioguiddeatilpagePage({Key? key, }) : super(key: key);
   void onInit() {}
 
   @override
   Widget build(BuildContext context) {
-    AudioGuideController controller = Get.find();
-    AudioGuide guide = controller.selectedGuide.value;
-    print("AudioGuideDetailPage");
-    print(guide.audioName);
+
+    AudioController controller = Get.find<AudioController>();
     final PageManager pageManager = PageManager();
-    pageManager.stop();
-    pageManager.remove();
-    pageManager.add();
+    controller.stop;
+    controller.remove;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(guide.audioName),
+        title: Text(controller.selectedGuide.value.audioName),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -38,7 +37,7 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
           AspectRatio(
             aspectRatio: 16 / 9,
             child: CachedNetworkImage(
-              imageUrl: guide.imageUrl,
+              imageUrl: controller.selectedGuide.value.imageUrl,
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) => Icon(Icons.error),
@@ -68,12 +67,12 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(guide.audioName,
+                                Text(controller.selectedGuide.value.audioName,
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(height: 10),
-                                Text(guide.audioBeschreibung),
+                                Text(controller.selectedGuide.value.audioBeschreibung),
                               ],
                             ),
                           ),
@@ -104,9 +103,9 @@ class AudioguiddeatilpagePage extends GetView<AudioGuideController> {
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  itemCount: guide.imageUrl.length,
+                                  itemCount: controller.selectedGuide.value.imageUrl.length,
                                   itemBuilder: (context, index) {
-                                    return Text(guide.imageUrl[index]);
+                                    return Text(controller.selectedGuide.value.imageUrl[index]);
                                   },
                                 ),
                                 SizedBox(height: 10),

@@ -14,9 +14,9 @@ class AppTranslations extends Translations {
         'de_DE': deDE().message,
         'en_US': enUS().message,
         'ru_RU': ruRU().message,
-        'tr_TR': trTr().message,
+        'tr_TR': trTR().message,
         'uk_UA': ukUA().message,
-        'fr_FR': frFr().message,
+        'fr_FR': frFR().message,
         'ar_AR': arAR().message,
       };
 }

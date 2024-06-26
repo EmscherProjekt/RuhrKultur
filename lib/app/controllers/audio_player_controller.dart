@@ -161,7 +161,7 @@ class PageManager {
   }
 
   Future<void> add() async {
-    AudioGuideController controller = Get.find();
+    AudioController controller = Get.find();
     AudioGuide guide = controller.selectedGuide.value;
     print(guide.audioName);
     print(guide.audioUrl);
