@@ -19,7 +19,7 @@ class ApiService {
 
   static Future<List<AudioGuide>> fetchAudioGuides() async {
     final api = ApiInformation();
-    var url = Uri.parse(api.baseUrl+api.audio);
+    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     print(response.body);
@@ -48,7 +48,7 @@ class ApiService {
 
   static Future<List<AudioGuide>> fetchAudioGuidesSafe() async {
     final api = ApiInformation();
-    var url = Uri.parse(api.baseUrl+api.audio);
+    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
 
