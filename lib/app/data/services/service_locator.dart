@@ -1,5 +1,5 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:ruhrkultur/app/controllers/audio_player_controller.dart';
+import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 
 import 'audio_handler.dart';
 
@@ -13,6 +13,6 @@ Future<void> setupServiceLocator() async {
 
 
   // page state
-    getIt.registerLazySingleton<PageManager>(() => PageManager());
+    getIt.registerLazySingleton<AudioController>(() => AudioController());
 
 }

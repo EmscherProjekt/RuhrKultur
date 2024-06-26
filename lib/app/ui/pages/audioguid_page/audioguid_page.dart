@@ -7,9 +7,7 @@ import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.da
 class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
 
- 
   void onInit() {
- 
     _loadData();
   }
 
@@ -39,10 +37,12 @@ class AudioguidPage extends GetView<AudioController> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("audio_page_no_data_found".tr, style: TextStyle(fontSize: 20)),
+                        Text("audio_page_no_data_found".tr,
+                            style: TextStyle(fontSize: 20)),
                         TextButton(
                           onPressed: _loadData,
-                          child: Text("audio_page_no_data_found_info".tr, style: TextStyle(fontSize: 20)),
+                          child: Text("audio_page_no_data_found_info".tr,
+                              style: TextStyle(fontSize: 20)),
                         ),
                       ],
                     ),
@@ -54,9 +54,15 @@ class AudioguidPage extends GetView<AudioController> {
                       itemCount: controller.audioGuides.length,
                       itemBuilder: (context, index) {
                         final audioGuide = controller.audioGuides[index];
-                        return AudioguidCard(
-                          audioGuide: audioGuide,
-                          index: index,
+                        return GestureDetector(
+                          onTap: () {
+                            print(audioGuide);
+                            controller.setSelectedGuide(audioGuide);
+                          },
+                          child: AudioguidCard(
+                      
+                            audioGuide: audioGuide,
+                          ),
                         );
                       },
                     ),

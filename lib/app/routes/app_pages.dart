@@ -64,11 +64,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.AUDIOGUIDDEATILPAGE,
       page: () {
-        final arguments = Get.arguments as Map<String, dynamic>;
-        return AudioguiddeatilpagePage(
-          audioGuide: arguments['audioGuide'],
-          index: arguments['index'],
-        );
+        return AudioguiddeatilpagePage();
       },
       binding: AudioguiddeatilpageBinding(),
       transition: _defaultTransition,

@@ -13,8 +13,8 @@ import 'package:ruhrkultur/app/ui/theme/colors.dart';
 
 class AudioguidCard extends GetView<AudioController> {
   final AudioGuide audioGuide;
-  final int index;
-  AudioguidCard({required this.audioGuide, required this.index});
+
+  AudioguidCard({required this.audioGuide});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,6 @@ class AudioguidCard extends GetView<AudioController> {
     // Set the card width and height based on screen size
     final cardWidth = screenSize.width * 0.9;
     final cardHeight = screenSize.height * 0.2;
-
     return Center(
       child: Container(
         width: cardWidth,
@@ -113,6 +112,8 @@ class AudioguidCard extends GetView<AudioController> {
                 ResponsiveRowColumnItem(
                   child: GestureDetector(
                     onTap: () {
+                      print(audioGuide.audioBeschreibung);
+                      controller.setSelectedGuide( audioGuide);
                       Get.toNamed(AppRoutes.AUDIOGUIDDEATILPAGE);
                     },
                     child: Align(

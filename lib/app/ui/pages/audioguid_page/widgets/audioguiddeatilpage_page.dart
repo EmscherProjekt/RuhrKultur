@@ -1,18 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ruhrkultur/app/controllers/audio_player_controller.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/service_locator.dart';
 
 class AudioguiddeatilpagePage extends GetView<AudioController> {
-   final AudioGuide audioGuide;
-  final int index;
 
 
-  AudioguiddeatilpagePage({required this.audioGuide, required this.index});
+  AudioguiddeatilpagePage({Key? key});
   void onInit() {}
 
   @override
@@ -163,12 +160,12 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
 
 class PlayButton extends StatelessWidget {
   PlayButton({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
-    final pageManager = getIt<PageManager>();
+    AudioController controller = Get.find<AudioController>();
     return ValueListenableBuilder<ButtonState>(
-      valueListenable: pageManager.playButtonNotifier,
+      valueListenable: controller.playButtonNotifier,
       builder: (_, value, __) {
         switch (value) {
           case ButtonState.loading:
@@ -182,13 +179,13 @@ class PlayButton extends StatelessWidget {
             return IconButton(
               icon: const Icon(Icons.play_arrow),
               iconSize: 32.0,
-              onPressed: pageManager.play,
+              onPressed: controller.play,
             );
           case ButtonState.playing:
             return IconButton(
               icon: const Icon(Icons.pause),
               iconSize: 32.0,
-              onPressed: pageManager.pause,
+              onPressed: controller.pause,
             );
         }
       },

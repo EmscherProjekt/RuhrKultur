@@ -68,6 +68,7 @@ class AudioController extends GetxController {
 
   // Audio player initialization
   void init() async {
+    
     _listenToChangesInPlaylist();
     _listenToPlaybackState();
     _listenToCurrentPosition();
@@ -196,7 +197,8 @@ class AudioController extends GetxController {
   }
 
   Future<void> add() async {
-    AudioGuide guide = selectedGuide.value;
+    AudioController controller = Get.find<AudioController>();
+    final guide = controller.selectedGuide.value;
     final mediaItem = MediaItem(
       id: guide.id.toString(),
       album: guide.audioBeschreibung,
