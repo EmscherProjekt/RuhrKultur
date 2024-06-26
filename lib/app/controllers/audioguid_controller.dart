@@ -213,10 +213,10 @@ class AudioController extends GetxController {
           _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
           break;
         case RepeatState.repeatSong:
-          _audioHandler.setRepeatMode(AudioServiceRepeatMode.one);
+          _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
           break;
         case RepeatState.repeatPlaylist:
-          _audioHandler.setRepeatMode(AudioServiceRepeatMode.all);
+          _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
           break;
       }
     } catch (e) {
