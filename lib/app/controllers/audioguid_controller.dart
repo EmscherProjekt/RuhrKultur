@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
@@ -226,9 +227,10 @@ class AudioController extends GetxController {
   void shuffle() {
     final enable = !isShuffleModeEnabledNotifier.value;
     isShuffleModeEnabledNotifier.value = enable;
+    
     try {
       if (enable) {
-        _audioHandler.setShuffleMode(AudioServiceShuffleMode.all);
+        _audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
       } else {
         _audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
       }
