@@ -12,10 +12,12 @@ import 'package:audio_service/audio_service.dart';
 
 class AudioController extends GetxController {
   // Audio guides
+  var id;
+  var oldId;
   var audioGuides = <AudioGuide>[].obs;
   var isLoading = true.obs;
   var selectedGuide = AudioGuide(
-    id: 1,
+    id: 0,
     audioName: "",
     audioBeschreibung: "",
     imageUrl: "",
@@ -64,6 +66,11 @@ class AudioController extends GetxController {
   }
 
   void setSelectedGuide(AudioGuide guide) {
+    _audioHandler.androidPlaybackInfo.listen(
+      (event) {
+        print("Android playback info: $event");
+      },
+    );
     selectedGuide.value = guide;
   }
 
@@ -75,6 +82,13 @@ class AudioController extends GetxController {
     _listenToBufferedPosition();
     _listenToTotalDuration();
     _listenToChangesInSong();
+    _audioHandler.playbackState.listen((state) {
+      if (state.processingState == AudioProcessingState.idle ||
+          state.processingState == AudioProcessingState.error) {
+        print("Error or idle state detected: ${state.errorMessage}");
+        // Handle error or idle state
+      }
+    });
   }
 
   void _listenToChangesInPlaylist() {
@@ -227,7 +241,7 @@ class AudioController extends GetxController {
   void shuffle() {
     final enable = !isShuffleModeEnabledNotifier.value;
     isShuffleModeEnabledNotifier.value = enable;
-    
+
     try {
       if (enable) {
         _audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
@@ -240,21 +254,29 @@ class AudioController extends GetxController {
   }
 
   Future<void> add() async {
-    try {
-      AudioGuide guide = selectedGuide.value;
-      print(guide.audioName);
-      print(guide.audioUrl);
-      final mediaItem = MediaItem(
-        id: guide.id.toString(),
-        album: guide.audioBeschreibung,
-        title: guide.audioName,
-        artUri: Uri.parse(guide.imageUrl),
-        extras: {'url': guide.audioUrl},
-      );
+    print(" 1 ID: $id OLDID $oldId");
+    if (oldId == id) {
+      return;
+    } else {
+      oldId = id;
+      id++;
+      print("2 ID: $id OLDID $oldId");
+      try {
+        AudioGuide guide = selectedGuide.value;
+        print(guide.audioName);
+        print(guide.audioUrl);
+        final mediaItem = MediaItem(
+          id: guide.id.toString(),
+          album: guide.audioBeschreibung,
+          title: guide.audioName,
+          artUri: Uri.parse(guide.imageUrl),
+          extras: {'url': guide.audioUrl},
+        );
 
-      _audioHandler.addQueueItem(mediaItem);
-    } catch (e) {
-      print("Error adding media item: $e");
+        _audioHandler.addQueueItem(mediaItem);
+      } catch (e) {
+        print("Error adding media item: $e");
+      }
     }
   }
 
@@ -290,6 +312,7 @@ class AudioController extends GetxController {
     dispose();
     super.onClose();
   }
+
   @override
   void dispose() {
     try {
