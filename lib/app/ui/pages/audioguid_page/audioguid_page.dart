@@ -14,6 +14,9 @@ class AudioguidPage extends GetView<AudioController> {
   Future<void> _loadData() async {
     await Get.find<AudioController>().fetchAudioGuidesSafe();
   }
+    Future<void> _loadDataSafe() async {
+    await Get.find<AudioController>().fetchAudioGuides();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class AudioguidPage extends GetView<AudioController> {
                         Text("audio_page_no_data_found".tr,
                             style: TextStyle(fontSize: 20)),
                         TextButton(
-                          onPressed: _loadData,
+                          onPressed: _loadDataSafe,
                           child: Text("audio_page_no_data_found_info".tr,
                               style: TextStyle(fontSize: 20)),
                         ),
@@ -57,7 +60,7 @@ class AudioguidPage extends GetView<AudioController> {
                         return GestureDetector(
                           onTap: () {
                             print(audioGuide);
-                            controller.setSelectedGuide(audioGuide);
+                          
                           },
                           child: AudioguidCard(
                       

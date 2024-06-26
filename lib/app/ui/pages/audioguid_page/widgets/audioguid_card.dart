@@ -111,10 +111,10 @@ class AudioguidCard extends GetView<AudioController> {
                 ResponsiveRowColumnItem(child: Spacer()),
                 ResponsiveRowColumnItem(
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       print(audioGuide.audioBeschreibung);
-                      controller.setSelectedGuide( audioGuide);
-                      Get.toNamed(AppRoutes.AUDIOGUIDDEATILPAGE);
+                      controller.setSelectedGuide(audioGuide);
+                      await Get.toNamed(AppRoutes.AUDIOGUIDDEATILPAGE);
                     },
                     child: Align(
                       alignment: Alignment.bottomRight,

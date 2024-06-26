@@ -1,7 +1,6 @@
-import 'dart:async';
-import 'dart:math';
+import 'package:audio_service/audio_service.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
@@ -9,13 +8,9 @@ import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/progress_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/repeat_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
-import 'package:ruhrkultur/app/data/services/service_locator.dart';
-import 'package:audio_service/audio_service.dart';
 
 class AudioController extends GetxController {
   // Audio guides
-  var id = 1;
-  var oldId = 0;
   var audioGuides = <AudioGuide>[].obs;
   var isLoading = true.obs;
   var selectedGuide = AudioGuide(
@@ -37,11 +32,11 @@ class AudioController extends GetxController {
   final isLastSongNotifier = ValueNotifier<bool>(true);
   final isShuffleModeEnabledNotifier = ValueNotifier<bool>(false);
 
-  final _audioHandler = getIt<AudioHandler>();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void onInit() {
-    fetchAudioGuidesSafe();
+    fetchAudioGuides();
     init();
     super.onInit();
   }
@@ -68,11 +63,9 @@ class AudioController extends GetxController {
   }
 
   void setSelectedGuide(AudioGuide guide) {
-    _audioHandler.androidPlaybackInfo.listen(
-      (event) {
-        print("Android playback info: $event");
-      },
-    );
+    if (selectedGuide.value.id == guide.id) {
+      return; // Prevent setting the same guide multiple times
+    }
     selectedGuide.value = guide;
   }
 
@@ -84,46 +77,9 @@ class AudioController extends GetxController {
     _listenToBufferedPosition();
     _listenToTotalDuration();
     _listenToChangesInSong();
-    _audioHandler.playbackState.listen((state) {
-      if (state.processingState == AudioProcessingState.idle ||
-          state.processingState == AudioProcessingState.error) {
-        print("Error or idle state detected: ${state.errorMessage}");
-        // Handle error or idle state
-      }
-    });
-  }
-
-  void _listenToChangesInPlaylist() {
-    _audioHandler.queue.listen((playlist) {
-      if (playlist.isEmpty) {
-        playlistNotifier.value = [];
-        currentSongTitleNotifier.value = '';
-        currentSongImageUrlNotifier.value = '';
-      } else {
-        final newList = playlist.map((item) => item.title).toList();
-        playlistNotifier.value = newList;
-        final currentSongImageUrl =
-            playlist.isNotEmpty ? playlist[0].artUri.toString() : '';
-        currentSongImageUrlNotifier.value = currentSongImageUrl;
-      }
-      _updateSkipButtons();
-    });
-  }
-
-  void _listenToPlaybackState() {
-    _audioHandler.playbackState.listen((playbackState) {
-      final isPlaying = playbackState.playing;
-      final processingState = playbackState.processingState;
-      if (processingState == AudioProcessingState.loading ||
-          processingState == AudioProcessingState.buffering) {
-        playButtonNotifier.value = ButtonState.loading;
-      } else if (!isPlaying) {
-        playButtonNotifier.value = ButtonState.paused;
-      } else if (processingState != AudioProcessingState.completed) {
-        playButtonNotifier.value = ButtonState.playing;
-      } if (processingState == AudioProcessingState.completed){
-        oldId ++;
-         AwesomeDialog(
+    _audioPlayer.playbackEventStream.listen((event) {
+      if (event.processingState == ProcessingState.completed) {
+        AwesomeDialog(
           context: Get.context!,
           animType: AnimType.scale,
           dialogType: DialogType.success,
@@ -133,14 +89,45 @@ class AudioController extends GetxController {
             Get.back();
           },
         ).show();
-        _audioHandler.stop();
+        _audioPlayer.stop();
         remove();
       }
     });
   }
 
+  void _listenToChangesInPlaylist() {
+    _audioPlayer.sequenceStateStream.listen((sequenceState) {
+      if (sequenceState?.sequence.isEmpty ?? true) {
+        playlistNotifier.value = [];
+        currentSongTitleNotifier.value = '';
+        currentSongImageUrlNotifier.value = '';
+      } else {
+        final newList = sequenceState!.sequence.map((item) => (item.tag as MediaItem).title).toList();
+        playlistNotifier.value = newList;
+        final currentSongImageUrl = sequenceState.sequence.isNotEmpty
+            ? (sequenceState.sequence.first.tag as MediaItem).artUri.toString()
+            : '';
+        currentSongImageUrlNotifier.value = currentSongImageUrl;
+      }
+      _updateSkipButtons();
+    });
+  }
+
+  void _listenToPlaybackState() {
+    _audioPlayer.playingStream.listen((isPlaying) {
+      if (_audioPlayer.processingState == ProcessingState.loading ||
+          _audioPlayer.processingState == ProcessingState.buffering) {
+        playButtonNotifier.value = ButtonState.loading;
+      } else if (!isPlaying) {
+        playButtonNotifier.value = ButtonState.paused;
+      } else if (_audioPlayer.processingState != ProcessingState.completed) {
+        playButtonNotifier.value = ButtonState.playing;
+      }
+    });
+  }
+
   void _listenToCurrentPosition() {
-    AudioService.position.listen((position) {
+    _audioPlayer.positionStream.listen((position) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
         current: position,
@@ -151,49 +138,52 @@ class AudioController extends GetxController {
   }
 
   void _listenToBufferedPosition() {
-    _audioHandler.playbackState.listen((playbackState) {
+    _audioPlayer.bufferedPositionStream.listen((bufferedPosition) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
         current: oldState.current,
-        buffered: playbackState.bufferedPosition,
+        buffered: bufferedPosition,
         total: oldState.total,
       );
     });
   }
 
   void _listenToTotalDuration() {
-    _audioHandler.mediaItem.listen((mediaItem) {
+    _audioPlayer.durationStream.listen((duration) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
         current: oldState.current,
         buffered: oldState.buffered,
-        total: mediaItem?.duration ?? Duration.zero,
+        total: duration ?? Duration.zero,
       );
     });
   }
 
   void _listenToChangesInSong() {
-    _audioHandler.mediaItem.listen((mediaItem) {
-      currentSongTitleNotifier.value = mediaItem?.title ?? '';
-      _updateSkipButtons();
+    _audioPlayer.currentIndexStream.listen((index) {
+      if (index != null) {
+        final mediaItem = _audioPlayer.sequence![index].tag as MediaItem;
+        currentSongTitleNotifier.value = mediaItem.title;
+        _updateSkipButtons();
+      }
     });
   }
 
   void _updateSkipButtons() {
-    final mediaItem = _audioHandler.mediaItem.value;
-    final playlist = _audioHandler.queue.value;
-    if (playlist.length < 2 || mediaItem == null) {
+    final playlist = _audioPlayer.sequence;
+    final currentIndex = _audioPlayer.currentIndex;
+    if (playlist == null || playlist.isEmpty || currentIndex == null) {
       isFirstSongNotifier.value = true;
       isLastSongNotifier.value = true;
     } else {
-      isFirstSongNotifier.value = playlist.first == mediaItem;
-      isLastSongNotifier.value = playlist.last == mediaItem;
+      isFirstSongNotifier.value = currentIndex == 0;
+      isLastSongNotifier.value = currentIndex == playlist.length - 1;
     }
   }
 
   void play() {
     try {
-      _audioHandler.play();
+      _audioPlayer.play();
     } catch (e) {
       print("Error playing audio: $e");
     }
@@ -201,7 +191,7 @@ class AudioController extends GetxController {
 
   void pause() {
     try {
-      _audioHandler.pause();
+      _audioPlayer.pause();
     } catch (e) {
       print("Error pausing audio: $e");
     }
@@ -209,7 +199,7 @@ class AudioController extends GetxController {
 
   void seek(Duration position) {
     try {
-      _audioHandler.seek(position);
+      _audioPlayer.seek(position);
     } catch (e) {
       print("Error seeking audio: $e");
     }
@@ -217,7 +207,7 @@ class AudioController extends GetxController {
 
   void previous() {
     try {
-      _audioHandler.skipToPrevious();
+      _audioPlayer.seekToPrevious();
     } catch (e) {
       print("Error skipping to previous audio: $e");
     }
@@ -225,7 +215,7 @@ class AudioController extends GetxController {
 
   void next() {
     try {
-      _audioHandler.skipToNext();
+      _audioPlayer.seekToNext();
     } catch (e) {
       print("Error skipping to next audio: $e");
     }
@@ -237,13 +227,13 @@ class AudioController extends GetxController {
     try {
       switch (repeatMode) {
         case RepeatState.off:
-          _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
+          _audioPlayer.setLoopMode(LoopMode.off);
           break;
         case RepeatState.repeatSong:
-          _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
+          _audioPlayer.setLoopMode(LoopMode.one);
           break;
         case RepeatState.repeatPlaylist:
-          _audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
+          _audioPlayer.setLoopMode(LoopMode.all);
           break;
       }
     } catch (e) {
@@ -257,9 +247,9 @@ class AudioController extends GetxController {
 
     try {
       if (enable) {
-        _audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
+        _audioPlayer.setShuffleModeEnabled(true);
       } else {
-        _audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
+        _audioPlayer.setShuffleModeEnabled(false);
       }
     } catch (e) {
       print("Error setting shuffle mode: $e");
@@ -267,34 +257,30 @@ class AudioController extends GetxController {
   }
 
   Future<void> add() async {
-    print(" 1 ID: $id OLDID $oldId");
-    if (oldId == id) {
-      return;
+    if (_audioPlayer.sequence?.any((item) => item.tag.id == selectedGuide.value.id.toString()) ?? false) {
+      print("Guide already in queue");
+      return; // Prevent adding the same guide multiple times
     }
-    if (oldId != id) {
-      id++;
-      print("2 ID: $id OLDID $oldId");
-      try {
-        AudioGuide guide = selectedGuide.value;
-        print(guide.audioName);
-        print(guide.audioUrl);
-        final mediaItem = MediaItem(
-          id: guide.id.toString(),
-          album: guide.audioBeschreibung,
-          title: guide.audioName,
-          artUri: Uri.parse(guide.imageUrl),
-          extras: {'url': guide.audioUrl},
-        );
 
-        _audioHandler.addQueueItem(mediaItem);
-      } catch (e) {
-        print("Error adding media item: $e");
-      }
+    try {
+      AudioGuide guide = selectedGuide.value;
+      print(guide.audioName);
+      print(guide.audioUrl);
+      final mediaItem = MediaItem(
+        id: guide.id.toString(),
+        album: guide.audioBeschreibung,
+        title: guide.audioName,
+        artUri: Uri.parse(guide.imageUrl),
+        extras: {'url': guide.audioUrl},
+      );
+      remove();
+      _audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(guide.audioUrl), tag: mediaItem));
+    } catch (e) {
+      print("Error adding media item: $e");
     }
   }
 
-  Future<void> addTest(String id, String album, String title, String artUri,
-      String audioUrl) async {
+  Future<void> addTest(String id, String album, String title, String artUri, String audioUrl) async {
     try {
       final mediaItem = MediaItem(
         id: id,
@@ -304,7 +290,7 @@ class AudioController extends GetxController {
         extras: {'url': audioUrl},
       );
 
-      _audioHandler.addQueueItem(mediaItem);
+      _audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(audioUrl), tag: mediaItem));
     } catch (e) {
       print("Error adding test media item: $e");
     }
@@ -312,9 +298,7 @@ class AudioController extends GetxController {
 
   void remove() {
     try {
-      final lastIndex = _audioHandler.queue.value.length - 1;
-      if (lastIndex < 0) return;
-      _audioHandler.removeQueueItemAt(lastIndex);
+      _audioPlayer.stop();
     } catch (e) {
       print("Error removing media item: $e");
     }
@@ -328,17 +312,13 @@ class AudioController extends GetxController {
 
   @override
   void dispose() {
-    try {
-      _audioHandler.customAction('dispose');
-    } catch (e) {
-      print("Error disposing audio handler: $e");
-    }
+    _audioPlayer.dispose();
     super.dispose();
   }
 
   void stop() {
     try {
-      _audioHandler.stop();
+      _audioPlayer.stop();
     } catch (e) {
       print("Error stopping audio: $e");
     }
