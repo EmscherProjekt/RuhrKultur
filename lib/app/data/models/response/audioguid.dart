@@ -1,4 +1,5 @@
 class AudioGuide {
+  final int audioGuidID;
   final String audioName;
   final String audioBeschreibung;
   final String imageUrl;
@@ -7,6 +8,7 @@ class AudioGuide {
   final int id;
 
   AudioGuide({
+    required this.audioGuidID,
     required this.audioName,
     required this.audioBeschreibung,
     required this.imageUrl,
@@ -16,6 +18,7 @@ class AudioGuide {
 
   factory AudioGuide.fromJson(Map<String, dynamic> json) {
     return AudioGuide(
+      audioGuidID: json['audioGuidID'] ?? 0,
       id: json['id'] ?? 0,
       audioName: json['AudioName'] ?? '',
       audioBeschreibung: json['AudioBeschreibung'] ?? '',

@@ -14,6 +14,7 @@ class AudioController extends GetxController {
   var audioGuides = <AudioGuide>[].obs;
   var isLoading = true.obs;
   var selectedGuide = AudioGuide(
+    audioGuidID: 0,
     id: 0,
     audioName: "",
     audioBeschreibung: "",
