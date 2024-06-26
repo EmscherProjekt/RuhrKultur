@@ -5,16 +5,13 @@ import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 
 class AudioguiddeatilpagePage extends GetView<AudioController> {
-
-
   AudioguiddeatilpagePage({Key? key});
   void onInit() {}
- 
+
   @override
   Widget build(BuildContext context) {
-
     AudioController controller = Get.find<AudioController>();
- 
+
     controller.add();
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +64,8 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(height: 10),
-                                Text(controller.selectedGuide.value.audioBeschreibung),
+                                Text(controller
+                                    .selectedGuide.value.audioBeschreibung),
                               ],
                             ),
                           ),
@@ -98,18 +96,17 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  itemCount: controller.selectedGuide.value.imageUrl.length,
+                                  itemCount: 1,
                                   itemBuilder: (context, index) {
-                                    return Text(controller.selectedGuide.value.imageUrl[index]);
+                                    return Text(controller
+                                        .selectedGuide.value.imageUrl);
                                   },
                                 ),
                                 SizedBox(height: 10),
                                 Text('Videos:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                Text('Currently not available',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                getBody(),
                                 /*   ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -154,11 +151,124 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
       ),
     );
   }
+
+  Widget getBody() {
+    AudioController controller = Get.find<AudioController>();
+    var guide = controller.selectedGuide.value;
+
+    // Get context
+    var size = MediaQuery.of(Get.context!).size;
+    return GestureDetector(
+      onTap: () {
+        showAboutDialog(context: Get.context!);
+        // Get.toNamed(Routes.VIDEOPLAYER);
+      },
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: InkWell(
+                        onTap: () {
+                          showAboutDialog(context: Get.context!);
+                        },
+                        child: Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                    'assets/image/default_account_avatar.png',
+                                  ),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: DecorationImage(
+                                image: NetworkImage(guide.imageUrl),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: size.width - 180,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  guide.audioName,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.3),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      width: size.width - 180,
+                                      child: Text(
+                                        guide.audioBeschreibung,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12,
+                                            height: 1.5),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.more_vert,
+                            color: Colors.white.withOpacity(0.4),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
 }
 
 class PlayButton extends StatelessWidget {
   PlayButton({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     AudioController controller = Get.find<AudioController>();
