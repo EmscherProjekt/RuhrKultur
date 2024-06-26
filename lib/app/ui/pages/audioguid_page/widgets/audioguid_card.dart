@@ -12,15 +12,14 @@ import 'package:ruhrkultur/app/ui/theme/app_svg.dart';
 import 'package:ruhrkultur/app/ui/theme/colors.dart';
 
 class AudioguidCard extends GetView<AudioController> {
-  AudioguidCard({
-    Key? key,
-  }) : super(key: key);
+  final AudioGuide audioGuide;
+  final int index;
+  AudioguidCard({required this.audioGuide, required this.index});
 
   @override
   Widget build(BuildContext context) {
     // Get screen size
     final screenSize = MediaQuery.of(context).size;
-    AudioController controller = Get.find<AudioController>();
     // Set the card width and height based on screen size
     final cardWidth = screenSize.width * 0.9;
     final cardHeight = screenSize.height * 0.2;
@@ -42,7 +41,7 @@ class AudioguidCard extends GetView<AudioController> {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(
-              imageUrl: controller.selectedGuide.value.imageUrl,
+              imageUrl: audioGuide.imageUrl,
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
               fit: BoxFit.cover,
@@ -62,7 +61,7 @@ class AudioguidCard extends GetView<AudioController> {
                 ),
                 ResponsiveRowColumnItem(
                   child: Text(
-                    controller.selectedGuide.value.audioName,
+                    audioGuide.audioName,
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -83,7 +82,7 @@ class AudioguidCard extends GetView<AudioController> {
                     children: [
                       ResponsiveRowColumnItem(
                         child: Text(
-                          controller.selectedGuide.value.audioBeschreibung,
+                          audioGuide.audioBeschreibung,
                           style: TextStyle(
                             color: Colors.white70,
                             fontWeight: FontWeight.bold,

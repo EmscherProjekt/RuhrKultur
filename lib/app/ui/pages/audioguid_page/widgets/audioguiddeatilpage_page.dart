@@ -8,18 +8,18 @@ import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/service_locator.dart';
 
 class AudioguiddeatilpagePage extends GetView<AudioController> {
- 
+   final AudioGuide audioGuide;
+  final int index;
 
-  const AudioguiddeatilpagePage({Key? key, }) : super(key: key);
+
+  AudioguiddeatilpagePage({required this.audioGuide, required this.index});
   void onInit() {}
 
   @override
   Widget build(BuildContext context) {
 
     AudioController controller = Get.find<AudioController>();
-    final PageManager pageManager = PageManager();
-    controller.stop;
-    controller.remove;
+ 
 
     return Scaffold(
       appBar: AppBar(

@@ -7,11 +7,15 @@ import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.da
 class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
 
+ 
   void onInit() {
+ 
     _loadData();
   }
 
-  Future<void> _loadData() async {}
+  Future<void> _loadData() async {
+    await Get.find<AudioController>().fetchAudioGuidesSafe();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,37 +30,36 @@ class AudioguidPage extends GetView<AudioController> {
         body: Container(
           child: Center(
             child: RefreshIndicator(
-              onRefresh: () async {
-                await _loadData();
-              },
+              onRefresh: _loadData,
               child: Obx(() {
                 if (controller.isLoading.value) {
                   return Center(child: CircularProgressIndicator());
                 } else if (controller.audioGuides.isEmpty) {
                   return Center(
-                      child: Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("audio_page_no_data_found".tr,
-                            style: TextStyle(fontSize: 20)),
+                        Text("audio_page_no_data_found".tr, style: TextStyle(fontSize: 20)),
                         TextButton(
-                            onPressed: () {
-                              _loadData();
-                            },
-                            child: Text("audio_page_no_data_found_info".tr,
-                                style: TextStyle(fontSize: 20))),
+                          onPressed: _loadData,
+                          child: Text("audio_page_no_data_found_info".tr, style: TextStyle(fontSize: 20)),
+                        ),
                       ],
                     ),
-                  ));
+                  );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ListView.builder(
-                        itemCount: controller.audioGuides.length,
-                        itemBuilder: (context, index) {
-                          controller.audioGuides[index];
-                          return AudioguidCard();
-                        }),
+                      itemCount: controller.audioGuides.length,
+                      itemBuilder: (context, index) {
+                        final audioGuide = controller.audioGuides[index];
+                        return AudioguidCard(
+                          audioGuide: audioGuide,
+                          index: index,
+                        );
+                      },
+                    ),
                   );
                 }
               }),

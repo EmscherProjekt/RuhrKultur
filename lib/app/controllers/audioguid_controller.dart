@@ -42,7 +42,7 @@ class AudioController extends GetxController {
   }
 
   // Fetch audio guides
-  void fetchAudioGuides() async {
+  Future<void> fetchAudioGuides() async {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuides();
@@ -52,7 +52,7 @@ class AudioController extends GetxController {
     }
   }
 
-  void fetchAudioGuidesSafe() async {
+  Future<void> fetchAudioGuidesSafe() async {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuidesSafe();

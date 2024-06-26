@@ -37,6 +37,7 @@ dependencies:
   responsive_framework: ^1.4.0
   flutter_modular: ^6.3.4
   posthog_flutter: ^4.5.0
+  redacted: ^1.0.11
 
 
 
