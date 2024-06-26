@@ -12,8 +12,8 @@ import 'package:audio_service/audio_service.dart';
 
 class AudioController extends GetxController {
   // Audio guides
-  var id;
-  var oldId;
+  var id = 1;
+  var oldId = 0;
   var audioGuides = <AudioGuide>[].obs;
   var isLoading = true.obs;
   var selectedGuide = AudioGuide(
@@ -257,7 +257,7 @@ class AudioController extends GetxController {
     print(" 1 ID: $id OLDID $oldId");
     if (oldId == id) {
       return;
-    } else {
+    } if(oldId != id){
       oldId = id;
       id++;
       print("2 ID: $id OLDID $oldId");
