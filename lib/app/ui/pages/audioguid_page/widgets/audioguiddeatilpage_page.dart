@@ -17,7 +17,7 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
 
     AudioController controller = Get.find<AudioController>();
  
-
+    controller.add();
     return Scaffold(
       appBar: AppBar(
         title: Text(controller.selectedGuide.value.audioName),
