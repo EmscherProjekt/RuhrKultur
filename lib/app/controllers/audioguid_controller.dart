@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/progress_notifier.dart';
@@ -119,7 +121,18 @@ class AudioController extends GetxController {
         playButtonNotifier.value = ButtonState.paused;
       } else if (processingState != AudioProcessingState.completed) {
         playButtonNotifier.value = ButtonState.playing;
-      } else {
+      } if (processingState == AudioProcessingState.completed){
+        oldId ++;
+         AwesomeDialog(
+          context: Get.context!,
+          animType: AnimType.scale,
+          dialogType: DialogType.success,
+          title: 'Fertig',
+          desc: "Sie haben diesen Audio Guides gehört!",
+          btnOkOnPress: () {
+            Get.back();
+          },
+        ).show();
         _audioHandler.stop();
         remove();
       }
@@ -257,8 +270,8 @@ class AudioController extends GetxController {
     print(" 1 ID: $id OLDID $oldId");
     if (oldId == id) {
       return;
-    } if(oldId != id){
-      oldId = id;
+    }
+    if (oldId != id) {
       id++;
       print("2 ID: $id OLDID $oldId");
       try {
