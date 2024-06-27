@@ -31,7 +31,7 @@ class AudioguidPage extends GetView<AudioController> {
         body: Container(
           child: Center(
             child: RefreshIndicator(
-              onRefresh: _loadData,
+              onRefresh: _loadDataSafe,
               child: Obx(() {
                 if (controller.isLoading.value) {
                   return Center(child: CircularProgressIndicator());

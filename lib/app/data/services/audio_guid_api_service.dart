@@ -19,6 +19,7 @@ class ApiService {
 
   static Future<List<AudioGuide>> fetchAudioGuides() async {
     final ApiInformation api = ApiInformation();
+    print("fetchAudioGuides");
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     double latitude = position.latitude;
@@ -40,7 +41,8 @@ class ApiService {
 
   static Future<List<AudioGuide>> fetchAudioGuidesSafe() async {
     final api = ApiInformation();
-    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
+    var url = Uri.parse(api.baseUrl +
+        api.audio + api.getAudioSafe);
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
@@ -69,7 +71,6 @@ class ApiService {
     }
   }
 
-  //static Future<List<
 
   static void _showErrorDialog() {
     Get.defaultDialog(

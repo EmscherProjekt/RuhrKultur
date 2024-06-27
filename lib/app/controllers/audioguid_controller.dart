@@ -42,7 +42,7 @@ class AudioController extends GetxController {
 
   @override
   void onInit() {
-    fetchAudioGuidesSafe();
+    fetchAudioGuides();
     init();
     super.onInit();
   }
@@ -52,16 +52,20 @@ class AudioController extends GetxController {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuides();
+   
       audioGuides.assignAll(guides);
     } finally {
       isLoading(false);
     }
   }
 
+
+  
   void fetchAudioGuidesSafe() async {
     try {
       isLoading(true);
       var guides = await ApiService.fetchAudioGuidesSafe();
+      print(audioGuides);
       audioGuides.assignAll(guides);
     } finally {
       isLoading(false);
