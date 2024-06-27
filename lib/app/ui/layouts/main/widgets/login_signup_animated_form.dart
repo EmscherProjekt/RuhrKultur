@@ -260,7 +260,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     if (widget.isPasswordPage == true) {
       return passwordButton(context, controller);
     }
-    return SizedBox.shrink(); 
+    return SizedBox.shrink();
   }
 
   Widget nameField() {

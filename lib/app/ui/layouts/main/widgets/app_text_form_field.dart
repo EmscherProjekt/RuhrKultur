@@ -26,6 +26,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       focusNode: focusNode,
       validator: (value) {
         return validator(value);

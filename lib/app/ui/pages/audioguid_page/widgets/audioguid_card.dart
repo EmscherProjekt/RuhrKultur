@@ -92,6 +92,7 @@ class AudioguidCard extends GetView<AudioController> {
                       ),
                       ResponsiveRowColumnItem(
                         child: Text(
+                          
                           '2033533 Listeners',
                           style: TextStyle(
                               color: Colors.white70,
