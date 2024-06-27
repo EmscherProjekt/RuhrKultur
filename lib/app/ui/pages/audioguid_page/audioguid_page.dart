@@ -12,10 +12,10 @@ class AudioguidPage extends GetView<AudioController> {
   }
 
   Future<void> _loadData() async {
-    await Get.find<AudioController>().fetchAudioGuides();
+    await Get.find<AudioController>().fetchAudioGuides;
   }
     Future<void> _loadDataSafe() async {
-    await Get.find<AudioController>().fetchAudioGuidesSafe();
+    await Get.find<AudioController>().fetchAudioGuidesSafe;
   }
 
   @override

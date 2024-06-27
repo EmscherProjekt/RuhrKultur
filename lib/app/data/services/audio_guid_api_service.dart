@@ -11,29 +11,41 @@ import 'package:ruhrkultur/app/data/models/response/audioguid_video.dart';
 import 'package:ruhrkultur/app/routes/app_routes.dart';
 
 class ApiService {
-
   static Future<LevelReq> setLevel(int level) async {
     //Todo: Implement setLevel
     return LevelReq();
   }
 
-  static Future<List<AudioGuide>> fetchAudioGuides() async {
+static Future<List<AudioGuide>> fetchAudioGuides() async {
+  var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
+  final response = await http.get(url, headers: {"Content-Type": "application/json"});
+  if (response.statusCode == 200) {
+    final List body = json.decode(response.body)?? [];
+    return body.map((e) => AudioGuide.fromJson(e)).toList();
+  } else {
+    _showErrorDialog();
+    throw Exception('Failed to load audio guides');
+  }
+}
+  static Future<List<AudioGuide>> fetchAudioGuidesSafe() async {
     final api = ApiInformation();
     var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
-    print(response.body);
     if (response.statusCode == 200) {
-      final List body = json.decode(response.body)['results'] ?? [];
+      final List body = json.decode(response.body) ?? [];
       return body.map((e) => AudioGuide.fromJson(e)).toList();
     } else {
       _showErrorDialog();
       throw Exception('Failed to load audio guides');
     }
   }
-  static Future<List<AudioGuideVideo>> fetchAudioGuidesVideos(int audioguid) async {
+
+  static Future<List<AudioGuideVideo>> fetchAudioGuidesVideos(
+      int audioguid) async {
     final api = ApiInformation();
-    var url = Uri.parse(api.baseUrl+api.audio+api.getAudioSafe +"/$audioguid" );
+    var url =
+        Uri.parse(api.baseUrl + api.audio + api.getAudioSafe + "/$audioguid");
     final response =
         await http.get(url, headers: {"Content-Type": "application/json"});
 
@@ -46,22 +58,6 @@ class ApiService {
     }
   }
 
-  static Future<List<AudioGuide>> fetchAudioGuidesSafe() async {
-    final api = ApiInformation();
-    var url = Uri.parse("http://api.ruhrkulturerlebnis.de/audio");
-    final response =
-        await http.get(url, headers: {"Content-Type": "application/json"});
-
-    if (response.statusCode == 200) {
-  
-      final List body = json.decode(response.body)['results'] ?? [];
-      return body.map((e) => AudioGuide.fromJson(e)).toList();
-    } else {
-      _showErrorDialog();
-      throw Exception('Failed to load audio guides');
-    }
-  }
-  
   //static Future<List<
 
   static void _showErrorDialog() {
