@@ -10,7 +10,7 @@ class ApiInformation {
   //Audio Endpoints
   String audio = '/audio';
   String getAudioSafe = '/allaudioguids';
-  String getAudio = '/';
+  String getAudiobyPostion = '/getaudioGuideByPosition';
 
   //AudioVideo Endpoints
   String audiovideo = '/getvideoInfo';

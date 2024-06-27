@@ -40,6 +40,7 @@ dependencies:
   redacted: ^1.0.11
   video_player: ^2.8.7
   cached_video_player_plus: ^3.0.2
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   # #to make native splash screen
