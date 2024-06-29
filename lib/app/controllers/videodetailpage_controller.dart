@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
 import 'package:video_player/video_player.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid_video.dart';
 
@@ -26,16 +27,10 @@ class VideodetailpageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _initializeController();
   }
-
-  void _initializeController() {
-    controller = VideoPlayerController.asset(selectedVideo.value.videoUrl)
-      ..initialize().then((_) {
-        controller.play();
-        update();
-      });
-  }
+void addVideo(int audioGuidID){
+  ApiService.fetchAudioGuidesVideos(audioGuidID);
+}
 
   void toggleSwitch(bool value) {
     isSwitched.value = value;
@@ -48,7 +43,8 @@ class VideodetailpageController extends GetxController {
 
   Future<void> startPlay(AudioGuideVideo videoItem) async {
     await controller.pause();
-    controller = VideoPlayerController.asset(videoItem.videoUrl)
+    controller = VideoPlayerController.networkUrl(Uri.parse(
+        "https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4"), videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true))
       ..addListener(() {
         playBackTime = controller.value.position.inSeconds;
         update();

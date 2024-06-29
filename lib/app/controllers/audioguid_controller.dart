@@ -51,8 +51,9 @@ class AudioController extends GetxController {
   void fetchAudioGuides() async {
     try {
       isLoading(true);
+      audioGuides.clear();
       var guides = await ApiService.fetchAudioGuides();
-   
+
       audioGuides.assignAll(guides);
     } finally {
       isLoading(false);

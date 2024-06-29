@@ -12,6 +12,7 @@ class AudioguidPage extends GetView<AudioController> {
   }
 
   Future<void> _loadData() async {
+    print("loadData");
     await Get.find<AudioController>().fetchAudioGuides;
   }
 
@@ -35,14 +36,14 @@ class AudioguidPage extends GetView<AudioController> {
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: _loadDataSafe,
+              onPressed: _loadData,
             ),
           ],
         ),
         body: Container(
           child: Center(
             child: RefreshIndicator(
-              onRefresh: _loadDataSafe,
+              onRefresh: _loadData,
               child: Obx(() {
                 if (controller.isLoading.value) {
                   return Center(child: CircularProgressIndicator());
