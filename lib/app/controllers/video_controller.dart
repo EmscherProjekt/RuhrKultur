@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid_video.dart';
 import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
 import 'package:video_player/video_player.dart';
-import 'package:better_player/better_player.dart';
 class VideoController extends GetxController {
     var audioGuidsVideos = <AudioGuideVideo>[].obs;
   var isLoading = true.obs;
