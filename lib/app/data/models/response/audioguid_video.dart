@@ -8,6 +8,7 @@ class AudioGuideVideo {
   int unlikeCount;
   String createdAt;
   String updatedAt;
+
   AudioGuideVideo({
     required this.id,
     required this.title,
@@ -21,23 +22,14 @@ class AudioGuideVideo {
   });
 
   factory AudioGuideVideo.fromJson(Map<String, dynamic> json) {
-    print(json);
     return AudioGuideVideo(
-      id: json['id'] is int
-          ? json['id']
-          : int.tryParse(json['id'].toString()) ?? 0,
+      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
       title: json['title'] ?? '',
-      thumbnail: json['thumbnail'] ?? '',
+      thumbnail: json['thumbnailUrl'] ?? '',
       videoUrl: json['videoUrl'] ?? '',
-      viewCount: json['viewCount'] is int
-          ? json['viewCount']
-          : int.tryParse(json['viewCount'].toString()) ?? 0,
-      likeCount: json['likeCount'] is int
-          ? json['likeCount']
-          : int.tryParse(json['likeCount'].toString()) ?? 0,
-      unlikeCount: json['unlikeCount'] is int
-          ? json['unlikeCount']
-          : int.tryParse(json['unlikeCount'].toString()) ?? 0,
+      viewCount: json['viewCount'] is int ? json['viewCount'] : int.tryParse(json['viewCount'].toString()) ?? 0,
+      likeCount: json['likeCount'] is int ? json['likeCount'] : int.tryParse(json['likeCount'].toString()) ?? 0,
+      unlikeCount: json['unlikeCount'] is int ? json['unlikeCount'] : int.tryParse(json['unlikeCount'].toString()) ?? 0,
       createdAt: json['createdAt'] ?? '',
       updatedAt: json['updatedAt'] ?? '',
     );
