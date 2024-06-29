@@ -64,7 +64,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.AUDIOGUIDDEATILPAGE,
       page: () {
-        return AudioguiddeatilpagePage();
+        return AudioGuideDetailPage();
       },
       binding: AudioguiddeatilpageBinding(),
       transition: _defaultTransition,

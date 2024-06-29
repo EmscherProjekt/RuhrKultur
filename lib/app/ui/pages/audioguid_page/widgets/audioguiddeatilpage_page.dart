@@ -2,21 +2,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
-import 'package:ruhrkultur/app/controllers/videodetailpage_controller.dart';
+import 'package:ruhrkultur/app/controllers/video_controller.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/video_card.dart';
+import 'package:video_player/video_player.dart';
 
-class AudioguiddeatilpagePage extends GetView<AudioController> {
-  AudioguiddeatilpagePage({Key? key});
-  void onInit() {}
+class AudioGuideDetailPage extends GetView<AudioController> {
+  final videoController = Get.put(VideoController());
+
+  AudioGuideDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AudioController controller = Get.find<AudioController>();
-    VideodetailpageController videoController =
-        Get.find<VideodetailpageController>();
-    videoController.addVideo(controller.selectedGuide.value.audioGuidID);
+    VideoController videoDetailController = Get.find<VideoController>();
 
+    videoDetailController
+        .fetchAudioGuidesVideos(controller.selectedGuide.value.audioGuidID);
     controller.add();
     return Scaffold(
       appBar: AppBar(
@@ -31,22 +32,32 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
       body: Container(
         child: RefreshIndicator(
           onRefresh: () async {
-            videoController
-                .addVideo(controller.selectedGuide.value.audioGuidID);
+            videoDetailController.fetchAudioGuidesVideos(
+                controller.selectedGuide.value.audioGuidID);
             controller.add();
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: CachedNetworkImage(
-                  imageUrl: controller.selectedGuide.value.imageUrl,
-                  placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
+              Obx(() {
+                if (videoController.isPlayingVideo.value &&
+                    videoController.videoPlayerController != null) {
+                  return AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: VideoPlayer(videoController.videoPlayerController!),
+                  );
+                } else {
+                  return AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: CachedNetworkImage(
+                      imageUrl: controller.selectedGuide.value.imageUrl,
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  );
+                }
+              }),
               PlayButton(),
               Expanded(
                 child: DefaultTabController(
@@ -84,7 +95,6 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                 ),
                               ),
                               // Tab 2: Media
-                              // Tab 2: Media
                               SingleChildScrollView(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
@@ -111,29 +121,41 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                     Text('Videos:',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: videoController
-                                          .audioGuidsVideos.length,
-                                      itemBuilder: (context, index) {
-                                        final video = videoController
-                                            .audioGuidsVideos[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              print(video);
-                                            },
-                                            child: VideoCard(video: video),
-                                          ),
+                                    Obx(() {
+                                      print(videoDetailController
+                                          .audioGuidsVideos.length);
+                                      if (videoDetailController
+                                          .audioGuidsVideos.isEmpty) {
+                                        return Text("No videos available");
+                                      } else {
+                                        return ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: videoDetailController
+                                              .audioGuidsVideos.length,
+                                          itemBuilder: (context, index) {
+                                            final video = videoDetailController
+                                                .audioGuidsVideos[index];
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  videoController.playVideo(
+                                                      video.videoUrl);
+                                                },
+                                                child: VideoCard(video: video),
+                                              ),
+                                            );
+                                          },
                                         );
-                                      },
-                                    ),
+                                      }
+                                    }),
                                   ],
                                 ),
                               ),
-                              // Tab 3: Quellen
+                              // Tab 3: Sources
                               SingleChildScrollView(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
@@ -143,14 +165,6 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                     Text("Currently not available"),
-                                    /*         ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: guide.audioGuidLizenzen.length,
-                                      itemBuilder: (context, index) {
-                                        return Text(guide.audioGuidLizenzen[index]);
-                                      },
-                                    ), */
                                   ],
                                 ),
                               ),
@@ -166,92 +180,6 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget getBody() {
-    AudioController controller = Get.find<AudioController>();
-    var guide = controller.selectedGuide.value;
-
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount:
-          1, // Change this to the actual number of videos if you have a list of videos
-      itemBuilder: (context, index) {
-        // Replace the static content with dynamic data if available
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GestureDetector(
-              onTap: () {
-                showAboutDialog(context: Get.context!);
-                // Get.toNamed(Routes.VIDEOPLAYER);
-              },
-              child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image:
-                        AssetImage('assets/image/default_account_avatar.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: NetworkImage(guide.imageUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        guide.audioName,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 1.3,
-                        ),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        guide.audioBeschreibung,
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          height: 1.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Icon(
-                  Icons.more_vert,
-                  color: Colors.white.withOpacity(0.4),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            // Add more items here as needed
-          ],
-        );
-      },
     );
   }
 }
