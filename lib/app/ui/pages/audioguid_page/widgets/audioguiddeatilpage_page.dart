@@ -84,6 +84,7 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                 ),
                               ),
                               // Tab 2: Media
+                              // Tab 2: Media
                               SingleChildScrollView(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
@@ -92,17 +93,7 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                     Text('Audio Files:',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
-                                    Text(
-                                      "Currently not available",
-                                    ),
-                                    /*  ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: guide.audioGuidAudios.length,
-                                      itemBuilder: (context, index) {
-                                        return Text(guide.audioGuidAudios[index]);
-                                      },
-                                    ), */
+                                    Text("Currently not available"),
                                     SizedBox(height: 10),
                                     Text('Images:',
                                         style: TextStyle(
@@ -126,25 +117,15 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                       itemCount: videoController
                                           .audioGuidsVideos.length,
                                       itemBuilder: (context, index) {
+                                        final video = videoController
+                                            .audioGuidsVideos[index];
                                         return Padding(
                                           padding: const EdgeInsets.all(10.0),
-                                          child: ListView.builder(
-                                            itemCount:
-                                                videoController.audioGuidsVideos
-                                                    .length,
-                                            itemBuilder: (context, index) {
-                                              final videos =
-                                                  videoController.audioGuidsVideos[
-                                                      index];
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  print(videos);
-                                                },
-                                                child: VideoCard(
-                                                  video: videos,
-                                                ),
-                                              );
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              print(video);
                                             },
+                                            child: VideoCard(video: video),
                                           ),
                                         );
                                       },
