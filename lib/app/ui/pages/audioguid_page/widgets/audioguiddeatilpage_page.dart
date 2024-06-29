@@ -106,7 +106,15 @@ class AudioguiddeatilpagePage extends GetView<AudioController> {
                                 Text('Videos:',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
-                                getBody(),
+                               Text("Currently not available"),
+                                /* ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: guide.audioGuidVideos.length,
+                                  itemBuilder: (context, index) {
+                                    return Text(guide.audioGuidVideos[index]);
+                                  },
+                                ), */
                               ],
                             ),
                           ),

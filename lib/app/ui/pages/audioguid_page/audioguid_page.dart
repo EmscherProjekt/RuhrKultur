@@ -14,7 +14,8 @@ class AudioguidPage extends GetView<AudioController> {
   Future<void> _loadData() async {
     await Get.find<AudioController>().fetchAudioGuides;
   }
-    Future<void> _loadDataSafe() async {
+
+  Future<void> _loadDataSafe() async {
     await Get.find<AudioController>().fetchAudioGuidesSafe;
   }
 
@@ -28,6 +29,16 @@ class AudioguidPage extends GetView<AudioController> {
         Breakpoint(start: 1201, end: double.infinity, name: DESKTOP),
       ],
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("audio_page_title".tr),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: _loadDataSafe,
+            ),
+          ],
+        ),
         body: Container(
           child: Center(
             child: RefreshIndicator(
@@ -60,10 +71,8 @@ class AudioguidPage extends GetView<AudioController> {
                         return GestureDetector(
                           onTap: () {
                             print(audioGuide);
-                          
                           },
                           child: AudioguidCard(
-                      
                             audioGuide: audioGuide,
                           ),
                         );
