@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruhrkultur/app/ui/test/pages/music.dart';
-import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
-
+import 'package:qr_bar_code_scanner_dialog/qr_bar_code_scanner_dialog.dart';
 class QRViewPage extends StatefulWidget {
   @override
   _QRViewPageState createState() => _QRViewPageState();
@@ -9,9 +8,14 @@ class QRViewPage extends StatefulWidget {
 
 class _QRViewPageState extends State<QRViewPage> {
   String? result;
+
   String? _scanValue;
 
-
+  void setScannedValue(String value) {
+    setState(() {
+      _scanValue = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +26,16 @@ class _QRViewPageState extends State<QRViewPage> {
           Expanded(
             flex: 5,
             child: TextButton(
-              onPressed: () {
-                QrcodeBarcodeScanner(
-                  onScannedCallback: (String value) => setState(
-                    () {
-                      _scanValue = value;
-                    },
-                  ),
-                );
-              },
+            
+               onPressed: () {
+                    _qrBarCodeScannerDialogPlugin.getScannedQrBarCode(
+                        context: context,
+                        onCode: (code) {
+                          setState(() {
+                            this.code = code;
+                          });
+                        });
+                  },
               child: Text('Start QR Code Scanner'),
             ),
           ),
