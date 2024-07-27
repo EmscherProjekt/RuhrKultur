@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 
 class MusicPlayerPage extends StatefulWidget {
@@ -29,7 +27,6 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   }
 
   Future<void> _playMusic(String musicId) async {
-
     //TODO: Server Kaufen bzw host möglichkeit für datein finden
     String url = 'https://hffzkcvj-8080.euw.devtunnels.ms/$musicId';
     print(url);
@@ -39,32 +36,6 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
     setState(() {
       _isPlaying = true;
     });
-  }
-
-  Future<String> _getLocalFilePath(String musicId) async {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    print('${appDocDir.path}/$musicId.mp3');
-    return '${appDocDir.path}/$musicId.mp3';
-  }
-
-  Future<bool> _fileExists(String path) async {
-    return File(path).exists();
-  }
-
-  Future<String> _downloadMusicFile(String musicId) async {
-    // URL zum Herunterladen der Musikdatei
-    String url = 'https://hffzkcvj-8080.euw.devtunnels.ms/$musicId.mp3';
-    String localFilePath = await _getLocalFilePath(musicId);
-
-    // Lade die Datei herunter und speichere sie lokal
-    var response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      File file = File(localFilePath);
-      await file.writeAsBytes(response.bodyBytes);
-    } else {
-      throw Exception('Failed to load music file');
-    }
-    return localFilePath;
   }
 
   @override

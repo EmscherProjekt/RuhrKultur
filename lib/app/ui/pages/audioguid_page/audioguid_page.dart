@@ -15,8 +15,7 @@ class AudioguidPage extends GetView<AudioController> {
   final _cancelController = TextEditingController(text: 'Cancel');
 
   final double _aspectTolerance = 0.00;
-  final int _numberOfCameras = 0;
-  final int _selectedCamera = -1;
+
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
 
