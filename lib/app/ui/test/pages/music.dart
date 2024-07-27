@@ -29,7 +29,6 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   }
 
   Future<void> _playMusic(String musicId) async {
-    // Andernfalls lade sie herunter und spiele sie ab
 
     //TODO: Server Kaufen bzw host möglichkeit für datein finden
     String url = 'https://hffzkcvj-8080.euw.devtunnels.ms/$musicId';
