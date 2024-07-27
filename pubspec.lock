@@ -294,14 +294,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.2"
-  flutter_camera_qrcode_scanner:
-    dependency: "direct main"
-    description:
-      name: flutter_camera_qrcode_scanner
-      sha256: "846995a91d909a0ae5a74f95d9d98c652329f78deaf2b6c2a756de5fa9a38cc5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   flutter_markdown:
     dependency: transitive
     description:
