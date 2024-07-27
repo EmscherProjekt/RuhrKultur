@@ -60,8 +60,6 @@ class AudioController extends GetxController {
     }
   }
 
-
-  
   void fetchAudioGuidesSafe() async {
     try {
       isLoading(true);
@@ -163,6 +161,15 @@ class AudioController extends GetxController {
         total: oldState.total,
       );
     });
+  }
+
+  void addMediaItem(String album, String title, bool isFile, String artUri) {
+    final mediaItem = MediaItem(
+      id: '1',
+      album: album,
+      title: title,
+      artUri: Uri.parse(artUri),
+    );
   }
 
   void _listenToTotalDuration() {

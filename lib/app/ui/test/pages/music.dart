@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:audioplayer/audioplayer.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 
 class MusicPlayerPage extends StatefulWidget {
   final String musicId;
@@ -14,6 +16,7 @@ class MusicPlayerPage extends StatefulWidget {
 }
 
 class _MusicPlayerPageState extends State<MusicPlayerPage> {
+  AudioController controller = Get.find<AudioController>();
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
 
@@ -28,11 +31,13 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
     if (await _fileExists(localFilePath)) {
       // Wenn die Datei lokal existiert, spiele sie ab
-      _audioPlayer.play(localFilePath, isLocal: true);
+     controller.addMediaItem("Test", "title", true, localFilePath);
+      _audioPlayer.setSource( DeviceFileSource(localFilePath));
     } else {
       // Andernfalls lade sie herunter und spiele sie ab
       String downloadedFilePath = await _downloadMusicFile(musicId);
-      _audioPlayer.play(downloadedFilePath, isLocal: true);
+      controller.addMediaItem("Test", "title", true, downloadedFilePath);
+
     }
 
     setState(() {
@@ -42,6 +47,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
   Future<String> _getLocalFilePath(String musicId) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
+    print('${appDocDir.path}/$musicId.mp3');
     return '${appDocDir.path}/$musicId.mp3';
   }
 
@@ -51,7 +57,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
   Future<String> _downloadMusicFile(String musicId) async {
     // URL zum Herunterladen der Musikdatei
-    String url = 'https://yourserver.com/music/$musicId.mp3';
+    String url = 'https://github.com/Ritterrh/backendv2/raw/main/public/$musicId.mp3';
     String localFilePath = await _getLocalFilePath(musicId);
 
     // Lade die Datei herunter und speichere sie lokal

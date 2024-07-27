@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ruhrkultur/app/ui/test/pages/qr.dart';
 import '../bindings/funktion_aktivert_binding.dart';
 import '../ui/pages/funktion_aktivert_page/funktion_aktivert_page.dart';
 import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
@@ -83,8 +84,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.FUNKTION_AKTIVERT,
-      page: () => const FunktionAktivertPage(),
-      binding: FunktionAktivertBinding(),
+      page: () => QRViewPage(),
       transition: _defaultTransition,
     ),
   ];

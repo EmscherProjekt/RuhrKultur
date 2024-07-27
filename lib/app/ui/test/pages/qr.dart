@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:ruhrkultur/app/ui/test/pages/music.dart';
 class QRViewPage extends StatefulWidget {
   @override
   _QRViewPageState createState() => _QRViewPageState();
