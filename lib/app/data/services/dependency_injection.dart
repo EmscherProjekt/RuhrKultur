@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 
 class DependecyInjection {
   static Future<void> init() async {
-// firebase init
-
     Get.put<NavigationController>(NavigationController());
     Get.put<MainController>(MainController());
   }
