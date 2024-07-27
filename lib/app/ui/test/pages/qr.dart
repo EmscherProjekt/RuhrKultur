@@ -1,25 +1,17 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:ruhrkultur/app/ui/test/pages/music.dart';
+import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
+
 class QRViewPage extends StatefulWidget {
   @override
   _QRViewPageState createState() => _QRViewPageState();
 }
 
 class _QRViewPageState extends State<QRViewPage> {
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController? controller;
-  Barcode? result;
+  String? result;
+  String? _scanValue;
 
-  @override
-  void reassemble() {
-    super.reassemble();
-    if (Platform.isAndroid) {
-      controller?.pauseCamera();
-    }
-    controller?.resumeCamera();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,47 +21,45 @@ class _QRViewPageState extends State<QRViewPage> {
         children: <Widget>[
           Expanded(
             flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
+            child: TextButton(
+              onPressed: () {
+                QrcodeBarcodeScanner(
+                  onScannedCallback: (String value) => setState(
+                    () {
+                      _scanValue = value;
+                    },
+                  ),
+                );
+              },
+              child: Text('Start QR Code Scanner'),
             ),
           ),
           Expanded(
             flex: 1,
             child: Center(
-              child: (result != null)
-                  ? Text('Data: ${result!.code}')
+              child: (_scanValue != null)
+                  ? Text('Data: $_scanValue')
                   : Text('Scan a code'),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        _handleQRCode(result!.code!);
-      });
+  void _onQRCodeScanned(String code) {
+    setState(() {
+      result = code;
+      _handleQRCode(code);
     });
   }
 
   void _handleQRCode(String code) {
-    // Navigiere zur Musikspielerseite mit der gescannten ID
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => MusicPlayerPage(musicId: code),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 }
