@@ -1,25 +1,39 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.dart';
+import 'package:ruhrkultur/app/ui/test/pages/music.dart';
 
 class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
 
+  final _flashOnController = TextEditingController(text: 'Flash on');
+  final _flashOffController = TextEditingController(text: 'Flash off');
+  final _cancelController = TextEditingController(text: 'Cancel');
+
+  final double _aspectTolerance = 0.00;
+  final int _numberOfCameras = 0;
+  final int _selectedCamera = -1;
+  final bool _useAutoFocus = true;
+  final bool _autoEnableFlash = false;
+
   void onInit() {
-    _loadData();
+  
   }
 
-  Future<void> _loadData() async {
+  /*Future<void> _loadData() async {
     print("loadData");
-    await Get.find<AudioController>().fetchAudioGuides;
+    await Get.find<AudioController>().fetchAudioGuides();
+   
   }
 
   Future<void> _loadDataSafe() async {
-    await Get.find<AudioController>().fetchAudioGuidesSafe;
+    await Get.find<AudioController>().fetchAudioGuidesSafe();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     AudioController controller = Get.find<AudioController>();
@@ -36,14 +50,22 @@ class AudioguidPage extends GetView<AudioController> {
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: _loadData,
+              onPressed:  () => Get.find<AudioController>().fetchAudioGuides(),
+            ),
+            IconButton(
+              icon: const Icon(Icons.camera),
+              tooltip: 'Scan',
+              onPressed: _scan,
             ),
           ],
         ),
         body: Container(
           child: Center(
             child: RefreshIndicator(
-              onRefresh: _loadData,
+              onRefresh: () async {
+                _showError("Refreshed");
+                return Future.value();
+              },
               child: Obx(() {
                 if (controller.isLoading.value) {
                   return Center(child: CircularProgressIndicator());
@@ -55,7 +77,7 @@ class AudioguidPage extends GetView<AudioController> {
                         Text("audio_page_no_data_found".tr,
                             style: TextStyle(fontSize: 20)),
                         TextButton(
-                          onPressed: _loadDataSafe,
+                          onPressed:Get.find<AudioController>().fetchAudioGuides,
                           child: Text("audio_page_no_data_found_info".tr,
                               style: TextStyle(fontSize: 20)),
                         ),
@@ -86,6 +108,51 @@ class AudioguidPage extends GetView<AudioController> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _scan() async {
+    try {
+      final ScanResult result = await BarcodeScanner.scan(
+        options: ScanOptions(
+          strings: {
+            'cancel': _cancelController.text,
+            'flash_on': _flashOnController.text,
+            'flash_off': _flashOffController.text,
+          },
+          autoEnableFlash: _autoEnableFlash,
+          android: AndroidOptions(
+            useAutoFocus: _useAutoFocus,
+            aspectTolerance: _aspectTolerance,
+          ),
+        ),
+      );
+
+      if (result.type == ResultType.Barcode) {
+        _handleQRCode(result.rawContent);
+      } else if (result.type == ResultType.Error) {
+        _showError(result.rawContent);
+      }
+    } on PlatformException catch (e) {
+      _showError(e.code == BarcodeScanner.cameraAccessDenied
+          ? 'The user did not grant the camera permission!'
+          : 'Unknown error: $e');
+    }
+  }
+
+  void _handleQRCode(String code) {
+    if (code.isNotEmpty) {
+      Get.to(() => MusicPlayerPage(musicId: code));
+    } else {
+      _showError("No QR code data found.");
+    }
+  }
+
+  void _showError(String message) {
+    Get.snackbar(
+      "Error",
+      message,
+      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

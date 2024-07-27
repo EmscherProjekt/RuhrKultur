@@ -14,7 +14,8 @@ class SplashViewPage extends GetView<SplashViewController> {
    await authController.checkLoginStatus;
    authController.isLogged.value
         ? Get.offNamed(AppRoutes.NAVPAGE)
-        : Get.offNamed(AppRoutes.LOGIN_VIEW);
+        //TODO: Implement OnboardViewPage
+        : Get.offNamed(AppRoutes.NAVPAGE);
   }
 
   @override

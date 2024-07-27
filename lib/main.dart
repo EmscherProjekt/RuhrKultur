@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           translations: AppTranslations(),
           locale: Get.deviceLocale,
           fallbackLocale: const Locale('en'),
-          initialRoute: AppRoutes.FUNKTION_AKTIVERT,
+          initialRoute: AppRoutes.SPLASH_VIEW,
           unknownRoute: AppPages.unknownRoutePage,
           getPages: AppPages.pages,
 

@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  barcode_scan2:
+    dependency: "direct main"
+    description:
+      name: barcode_scan2
+      sha256: a2ab566027cd57b2795ea42aa26835dbaa8fe70bcc1aff54942a14d3705dff97
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -707,30 +715,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.0"
-  qr_bar_code_scanner_dialog:
-    dependency: "direct main"
-    description:
-      name: qr_bar_code_scanner_dialog
-      sha256: dcb937816d4e562141530265bd1ca39fe00f57000fd79e26c163c957d443e9e4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.5"
-  qr_code_scanner:
+  protobuf:
     dependency: transitive
     description:
-      name: qr_code_scanner
-      sha256: f23b68d893505a424f0bd2e324ebea71ed88465d572d26bb8d2e78a4749591fd
+      name: protobuf
+      sha256: "68645b24e0716782e58948f8467fd42a880f255096a821f9e7d0ec625b00c84d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
-  qrcode_barcode_scanner:
-    dependency: "direct main"
-    description:
-      name: qrcode_barcode_scanner
-      sha256: eb84737ab197891c79a777ce9849e301b3024cf3e020b07f313ed6c0719a7ef2
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   quiver:
     dependency: transitive
     description:

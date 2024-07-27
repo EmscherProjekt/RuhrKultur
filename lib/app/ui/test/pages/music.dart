@@ -16,30 +16,27 @@ class MusicPlayerPage extends StatefulWidget {
 }
 
 class _MusicPlayerPageState extends State<MusicPlayerPage> {
-  AudioController controller = Get.find<AudioController>();
+  AudioController controller = Get.put(AudioController());
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
+    print("MusicPlayerPage");
+    print(widget.musicId);
     _playMusic(widget.musicId);
   }
 
   Future<void> _playMusic(String musicId) async {
-    String localFilePath = await _getLocalFilePath(musicId);
+    // Andernfalls lade sie herunter und spiele sie ab
 
-    if (await _fileExists(localFilePath)) {
-      // Wenn die Datei lokal existiert, spiele sie ab
-     controller.addMediaItem("Test", "title", true, localFilePath);
-      _audioPlayer.setSource( DeviceFileSource(localFilePath));
-    } else {
-      // Andernfalls lade sie herunter und spiele sie ab
-      String downloadedFilePath = await _downloadMusicFile(musicId);
-      controller.addMediaItem("Test", "title", true, downloadedFilePath);
-
-    }
-
+    //TODO: Server Kaufen bzw host möglichkeit für datein finden
+    String url = 'https://hffzkcvj-8080.euw.devtunnels.ms/$musicId';
+    print(url);
+    controller.addMediaItem("Test", "title", true, url);
+    print("playMusic");
+    controller.play();
     setState(() {
       _isPlaying = true;
     });
@@ -57,7 +54,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
   Future<String> _downloadMusicFile(String musicId) async {
     // URL zum Herunterladen der Musikdatei
-    String url = 'https://github.com/Ritterrh/backendv2/raw/main/public/$musicId.mp3';
+    String url = 'https://hffzkcvj-8080.euw.devtunnels.ms/$musicId.mp3';
     String localFilePath = await _getLocalFilePath(musicId);
 
     // Lade die Datei herunter und speichere sie lokal
@@ -101,7 +98,8 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   }
 
   void _stopMusic() {
-    _audioPlayer.stop();
+    controller.stop();
+    Get.back();
     setState(() {
       _isPlaying = false;
     });

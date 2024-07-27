@@ -84,7 +84,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.FUNKTION_AKTIVERT,
-      page: () => QRViewPage(),
+      page: () => App(),
       transition: _defaultTransition,
     ),
   ];

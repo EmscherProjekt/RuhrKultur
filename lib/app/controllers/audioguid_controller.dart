@@ -168,8 +168,11 @@ class AudioController extends GetxController {
       id: '1',
       album: album,
       title: title,
-      artUri: Uri.parse(artUri),
+      artUri: Uri.parse("https://cdn.pixabay.com/photo/2016/10/16/07/29/the-eiffel-tower-1744574_1280.jpg"),
+      extras: {'url':artUri},
     );
+    print(mediaItem); 
+    _audioHandler.addQueueItem(mediaItem);
   }
 
   void _listenToTotalDuration() {
