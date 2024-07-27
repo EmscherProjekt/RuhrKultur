@@ -53,7 +53,7 @@ class AudioguidPage extends GetView<AudioController> {
             ),
             IconButton(
               icon: const Icon(Icons.camera),
-              tooltip: 'Scan',
+              tooltip: 'audio_page_tooltip_scan'.tr,
               onPressed: _scan,
             ),
           ],

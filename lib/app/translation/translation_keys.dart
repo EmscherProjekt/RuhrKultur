@@ -1,10 +1,12 @@
 // ignore_for_file: constant_identifier_names
-
+//TODO ADD ALL KEYS FROM MSUIC PAGE AND QR CODE SCANNER
 //Navigation
 const navigation_bar_home = 'navigation_bar_home';
 const navigation_bar_settings = 'navigation_bar_settings';
 const navigation_bar_audioguid = 'navigation_bar_audioguid';
 //Audio
+const audio_page_title = 'audio_page_title';
+const audio_page_tooltip_scan = 'audio_page_tooltip_scan';
 const audio_player_current_song = 'audio_player_current_song';
 const audio_player_current_description = 'audio_player_current_description';
 const audio_player_back = 'audio_player_back';

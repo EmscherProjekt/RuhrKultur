@@ -4,12 +4,9 @@ class enUS {
   Map<String, String> get message => {
         translation.navigation_bar_home: 'Home',
         translation.navigation_bar_settings: 'Settings',
-        translation.navigation_bar_audioguid: 'Audio Guide',
-        translation.audio_player_current_song: 'Current Guide',
-        translation.audio_player_current_description: 'Description',
-        translation.audio_player_back: 'Back',
-        translation.audio_guid_location_error_titel: 'We could not find any AudioGuide near you.',
-        translation.audio_guid_location_error_description: 'Please try again later.',
+        translation.navigation_bar_audioguid: 'Audioguide',
+
+        //Settings
         translation.settings_genral: 'General',
         translation.settings_language: 'Language',
         translation.settings_language_deDE: 'German',
@@ -19,10 +16,12 @@ class enUS {
         translation.settings_language_ukUA: 'Ukrainian',
         translation.settings_language_frFR: 'French',
         translation.settings_language_arAR: 'Arabic',
-        translation.settings_language_modal_titel: 'Choose a language',
+        translation.settings_language_modal_titel: 'Select Language',
         translation.settings_about_page__description: 'Rediscover the Ruhr area',
         translation.settings_app_info: 'App Info',
         translation.settings_app_change_log: 'Change Log',
+
+        //Auth
         translation.auth_login: 'Login',
         translation.auth_already_have_account: 'Already have an account?',
         translation.auth_already_have_account_login: 'Login',
@@ -44,18 +43,27 @@ class enUS {
         translation.auth_regster_password_retype_error_notMatch: 'Passwords do not match',
         translation.auth_regster_password: 'Password',
         translation.auth_regster_password_error: 'Password is required',
-        translation.auth_regster_password_validation_minLength: 'Password must be at least 6 characters',
+        translation.auth_regster_password_validation_minLength: 'Password must be at least 6 characters long',
         translation.auth_sign_in_with: 'Sign in with',
         translation.auth_terms_and_conditions_one: 'I agree to the',
-        translation.auth_terms_and_conditions_two: 'terms and conditions',
-        translation.auth_terms_and_conditions_three: 'and the',
-        translation.auth_terms_and_conditions_four: 'privacy policy',
+        translation.auth_terms_and_conditions_two: 'Terms of Service',
+        translation.auth_terms_and_conditions_three: 'and',
+        translation.auth_terms_and_conditions_four: 'Privacy Policy',
+
+        //Audio
+        translation.audio_page_title: 'Audioguide Page',
+        translation.audio_page_tooltip_scan: 'Scan QR Code',
         translation.audio_page_no_data_found: 'No data found',
-        translation.audio_page_no_data_found_info: 'Please check back later',
+        translation.audio_page_no_data_found_info: 'Please try again later',
         translation.audio_page_card_merken: 'Save',
-        translation.audio_page_card_to_audioguid: 'To Audio Guide',
+        translation.audio_page_card_to_audioguid: 'To the Audioguide',
         translation.audio_page_detail_tab_content: 'Content',
         translation.audio_page_detail_tab_media: 'Media',
         translation.audio_page_detail_tab_sources: 'Sources',
+        translation.audio_player_current_song: 'Current Guide',
+        translation.audio_player_current_description: 'Description',
+        translation.audio_player_back: 'Back',
+        translation.audio_guid_location_error_titel: 'We could not find an audioguide near you.',
+        translation.audio_guid_location_error_description: 'Please try again later.',
       };
 }
