@@ -9,6 +9,5 @@ class AudioguiddeatilpageBinding implements Bindings {
 
     Get.lazyPut<AudioguiddeatilpageController>(
         () => AudioguiddeatilpageController());
-    // Get.put<AudioguiddeatilpageController>(AudioguiddeatilpageController());
   }
 }

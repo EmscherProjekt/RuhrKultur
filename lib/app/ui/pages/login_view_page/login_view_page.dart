@@ -104,19 +104,6 @@ class LoginViewPage extends GetView<LoginViewController> {
               ),
               EmailAndPassword(),
               const SizedBox(height: 5),
-              //TODO:    const SigninWithGoogleText(),
-              const SizedBox(height: 5),
-              /*     InkWell(
-                radius: 50,
-                onTap: () {
-                  //TODO Immplent google
-                },
-                child: SvgPicture.asset(
-                  'assets/svg/google_logo.svg',
-                  width: 40,
-                  height: 40,
-                ),
-              ), */
               const TermsAndConditionsText(),
               const SizedBox(height: 5),
               const DoNotHaveAccountText(),
@@ -160,18 +147,6 @@ class LoginViewPage extends GetView<LoginViewController> {
                       isSignUpPage: true,
                     ),
                     Gap(10.h),
-                    //TODO:   const SigninWithGoogleText(),
-                    Gap(5.h),
-                    /*   InkWell(
-                      onTap: () {
-                        //TODO Implement google
-                      },
-                      child: SvgPicture.asset(
-                        'assets/svg/google_logo.svg',
-                        width: 40.w,
-                        height: 40.h,
-                      ),
-                    ), */
                     const TermsAndConditionsText(),
                     Gap(15.h),
                     const AlreadyHaveAccountText(),

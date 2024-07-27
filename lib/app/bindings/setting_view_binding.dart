@@ -7,6 +7,5 @@ class SettingViewBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SettingViewController>(() => SettingViewController());
-        // Get.put<SettingViewController>(SettingViewController());
   }
 }

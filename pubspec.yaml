@@ -14,8 +14,7 @@ dependencies:
   get:
   get_storage:
 
-  firebase_messaging:
-  firebase_core:
+
   flutter_screenutil: ^5.9.3
   loading_overlay_pro: ^2.1.1
   dio: ^5.4.3+1

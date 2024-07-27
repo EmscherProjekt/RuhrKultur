@@ -129,7 +129,7 @@ class _SettingsPageState extends State<SettingViewPage> {
                     Get.back();
                   },
                 ),
-                // Add more languages here
+              // Add more languages here
               ],
             ),
           ),

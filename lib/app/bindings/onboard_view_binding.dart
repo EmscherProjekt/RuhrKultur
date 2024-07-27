@@ -7,6 +7,5 @@ class OnboardViewBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<OnboardViewController>(() => OnboardViewController());
-        // Get.put<OnboardViewController>(OnboardViewController());
   }
 }

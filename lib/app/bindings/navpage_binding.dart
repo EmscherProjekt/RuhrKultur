@@ -7,6 +7,5 @@ class NavpageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<NavpageController>(() => NavpageController());
-        // Get.put<NavpageController>(NavpageController());
   }
 }

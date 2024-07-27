@@ -1,7 +1,5 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 import 'package:ruhrkultur/app/bindings/audioguid_binding.dart';
 import 'package:ruhrkultur/app/bindings/home_binding.dart';
 import 'package:ruhrkultur/app/bindings/setting_view_binding.dart';

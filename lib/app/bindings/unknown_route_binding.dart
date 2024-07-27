@@ -7,6 +7,5 @@ class UnknownRouteBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UnknownRouteController>(() => UnknownRouteController());
-        // Get.put<UnknownRouteController>(UnknownRouteController());
   }
 }
