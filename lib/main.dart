@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,14 +15,13 @@ import 'app/ui/layouts/main/main_layout.dart';
 import 'app/ui/theme/themes.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   DependecyInjection.init();
   await RiveFile.initialize();
   await setupServiceLocator();
   await requestLocationPermission();
-
   runApp(const MyApp());
 }
 
@@ -43,7 +44,6 @@ class MyApp extends StatelessWidget {
           initialRoute: AppRoutes.SPLASH_VIEW,
           unknownRoute: AppPages.unknownRoutePage,
           getPages: AppPages.pages,
-
           builder: (_, child) {
             return ResponsiveBreakpoints.builder(
               child: child!,

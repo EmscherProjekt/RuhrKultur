@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ruhrkultur/app/ui/test/pages/qr.dart';
-import '../bindings/funktion_aktivert_binding.dart';
-import '../ui/pages/funktion_aktivert_page/funktion_aktivert_page.dart';
+
 import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
 import '../bindings/navpage_binding.dart';
 import '../ui/pages/navpage_page/navpage_page.dart';
@@ -80,11 +78,6 @@ class AppPages {
       name: AppRoutes.NAVPAGE,
       page: () => const NavpagePage(),
       binding: NavpageBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.FUNKTION_AKTIVERT,
-      page: () => App(),
       transition: _defaultTransition,
     ),
   ];

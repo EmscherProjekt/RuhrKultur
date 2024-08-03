@@ -129,7 +129,7 @@ class _SettingsPageState extends State<SettingViewPage> {
                     Get.back();
                   },
                 ),
-              // Add more languages here
+                // Add more languages here
               ],
             ),
           ),
@@ -189,13 +189,14 @@ class _SettingsPageState extends State<SettingViewPage> {
                   _showLanguageSelectionDialog();
                 },
               ),
-              _CustomListTile(
+              /*    _CustomListTile(
                   title: 'Log out',
                   icon: Icons.logout,
                   onTap: () {
                     AuthenticationController().logOut();
                     Get.offNamed(AppRoutes.SPLASH_VIEW);
                   }),
+                  */
             ],
           ),
         ],
