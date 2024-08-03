@@ -1,7 +1,7 @@
 name: ruhrkultur
 description: A new Flutter project.
 
-version: 0.4.92-alpha+0.4.92
+version: 0.4.93-alpha+0.4.93
 
 environment:
   sdk: ">=2.19.0 <3.22.0"

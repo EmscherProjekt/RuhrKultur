@@ -17,6 +17,8 @@ const audio_guid_location_error_description =
 
 //Settings
 const settings_genral = 'settings_genral';
+const settings_pacht_notes_modal_titel = 'settings_pacht_notes_modal_titel';
+const settings_pacht_notes = 'settings_pacht_notes';
 const settings_language = 'settings_language';
 const settings_language_deDE = 'settings_language_deDE';
 const settings_language_enUS = 'settings_language_enUS';

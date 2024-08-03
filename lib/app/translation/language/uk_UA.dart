@@ -8,6 +8,9 @@ class ukUA {
 
         //Settings
         translation.settings_genral: 'Загальні',
+        translation.settings_pacht_notes_modal_titel:
+            'Patch Notes Was ist neu?',
+        translation.settings_pacht_notes: 'Patch Notes',
         translation.settings_language: 'Мова',
         translation.settings_language_deDE: 'Німецька',
         translation.settings_language_enUS: 'Англійська',
@@ -17,7 +20,8 @@ class ukUA {
         translation.settings_language_frFR: 'Французька',
         translation.settings_language_arAR: 'Арабська',
         translation.settings_language_modal_titel: 'Виберіть мову',
-        translation.settings_about_page__description: 'Заново відкрийте для себе Рурський регіон',
+        translation.settings_about_page__description:
+            'Заново відкрийте для себе Рурський регіон',
         translation.settings_app_info: 'Інформація про додаток',
         translation.settings_app_change_log: 'Журнал змін',
 
@@ -39,11 +43,14 @@ class ukUA {
         translation.auth_regster_username: 'Ім’я користувача',
         translation.auth_regster_username_erro: 'Ім’я користувача обов’язкове',
         translation.auth_regster_password_retype: 'Повторити пароль',
-        translation.auth_regster_password_retype_error: 'Будь ласка, повторіть пароль',
-        translation.auth_regster_password_retype_error_notMatch: 'Паролі не співпадають',
+        translation.auth_regster_password_retype_error:
+            'Будь ласка, повторіть пароль',
+        translation.auth_regster_password_retype_error_notMatch:
+            'Паролі не співпадають',
         translation.auth_regster_password: 'Пароль',
         translation.auth_regster_password_error: 'Пароль обов’язковий',
-        translation.auth_regster_password_validation_minLength: 'Пароль має бути не менше 6 символів',
+        translation.auth_regster_password_validation_minLength:
+            'Пароль має бути не менше 6 символів',
         translation.auth_sign_in_with: 'Увійти з',
         translation.auth_terms_and_conditions_one: 'Я погоджуюсь з',
         translation.auth_terms_and_conditions_two: 'Умови надання послуг',
@@ -54,7 +61,8 @@ class ukUA {
         translation.audio_page_title: 'Сторінка аудіогіда',
         translation.audio_page_tooltip_scan: 'Сканувати QR-код',
         translation.audio_page_no_data_found: 'Дані не знайдені',
-        translation.audio_page_no_data_found_info: 'Будь ласка, спробуйте пізніше',
+        translation.audio_page_no_data_found_info:
+            'Будь ласка, спробуйте пізніше',
         translation.audio_page_card_merken: 'Зберегти',
         translation.audio_page_card_to_audioguid: 'До аудіогіда',
         translation.audio_page_detail_tab_content: 'Зміст',
@@ -63,7 +71,9 @@ class ukUA {
         translation.audio_player_current_song: 'Поточний гід',
         translation.audio_player_current_description: 'Опис',
         translation.audio_player_back: 'Назад',
-        translation.audio_guid_location_error_titel: 'Ми не змогли знайти аудіогід поблизу вас.',
-        translation.audio_guid_location_error_description: 'Будь ласка, спробуйте пізніше.',
+        translation.audio_guid_location_error_titel:
+            'Ми не змогли знайти аудіогід поблизу вас.',
+        translation.audio_guid_location_error_description:
+            'Будь ласка, спробуйте пізніше.',
       };
 }

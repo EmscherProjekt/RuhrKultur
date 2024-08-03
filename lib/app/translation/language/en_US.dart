@@ -8,6 +8,9 @@ class enUS {
 
         //Settings
         translation.settings_genral: 'General',
+        translation.settings_pacht_notes_modal_titel:
+            'Patch Notes Was ist neu?',
+        translation.settings_pacht_notes: 'Patch Notes',
         translation.settings_language: 'Language',
         translation.settings_language_deDE: 'German',
         translation.settings_language_enUS: 'English',
@@ -17,7 +20,8 @@ class enUS {
         translation.settings_language_frFR: 'French',
         translation.settings_language_arAR: 'Arabic',
         translation.settings_language_modal_titel: 'Select Language',
-        translation.settings_about_page__description: 'Rediscover the Ruhr area',
+        translation.settings_about_page__description:
+            'Rediscover the Ruhr area',
         translation.settings_app_info: 'App Info',
         translation.settings_app_change_log: 'Change Log',
 
@@ -39,11 +43,14 @@ class enUS {
         translation.auth_regster_username: 'Username',
         translation.auth_regster_username_erro: 'Username is required',
         translation.auth_regster_password_retype: 'Retype Password',
-        translation.auth_regster_password_retype_error: 'Please retype the password',
-        translation.auth_regster_password_retype_error_notMatch: 'Passwords do not match',
+        translation.auth_regster_password_retype_error:
+            'Please retype the password',
+        translation.auth_regster_password_retype_error_notMatch:
+            'Passwords do not match',
         translation.auth_regster_password: 'Password',
         translation.auth_regster_password_error: 'Password is required',
-        translation.auth_regster_password_validation_minLength: 'Password must be at least 6 characters long',
+        translation.auth_regster_password_validation_minLength:
+            'Password must be at least 6 characters long',
         translation.auth_sign_in_with: 'Sign in with',
         translation.auth_terms_and_conditions_one: 'I agree to the',
         translation.auth_terms_and_conditions_two: 'Terms of Service',
@@ -63,7 +70,9 @@ class enUS {
         translation.audio_player_current_song: 'Current Guide',
         translation.audio_player_current_description: 'Description',
         translation.audio_player_back: 'Back',
-        translation.audio_guid_location_error_titel: 'We could not find an audioguide near you.',
-        translation.audio_guid_location_error_description: 'Please try again later.',
+        translation.audio_guid_location_error_titel:
+            'We could not find an audioguide near you.',
+        translation.audio_guid_location_error_description:
+            'Please try again later.',
       };
 }

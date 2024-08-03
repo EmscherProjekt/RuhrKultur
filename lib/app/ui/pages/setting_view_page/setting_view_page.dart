@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:about/about.dart';
@@ -34,7 +35,30 @@ class _SettingsPageState extends State<SettingViewPage> {
     version = info.version;
     buildNumber = info.buildNumber;
   }
-
+  void _showUpdateDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('settings_pacht_notes_modal_titel'.tr),
+          content: Material(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text("Neu", style: TextStyle(fontSize: 20)),
+                Text("Dieser Update Dialog", style: TextStyle(fontSize: 15)),
+                Gap(10),
+                Text("Entfernet", style: TextStyle(fontSize: 20)),
+                Text("Standort Abfrage im Hintergrund", style: TextStyle(fontSize: 15)),
+                Text("Acoount Pflicht", style: TextStyle(fontSize: 15)),
+                // Add more languages here
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   void _showLanguageSelectionDialog() {
     showDialog(
       context: context,
@@ -187,6 +211,13 @@ class _SettingsPageState extends State<SettingViewPage> {
                 icon: Icons.language,
                 onTap: () {
                   _showLanguageSelectionDialog();
+                },
+              ),
+              _CustomListTile(
+                title: 'settings_pacht_notes'.tr,
+                icon: Icons.new_releases,
+                onTap: () {
+                  _showUpdateDialog();
                 },
               ),
               /*    _CustomListTile(

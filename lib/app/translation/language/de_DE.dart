@@ -8,6 +8,8 @@ class deDE {
 
         //Settings
         translation.settings_genral: 'Allgemein',
+        translation.settings_pacht_notes_modal_titel: 'Patch Notes Was ist neu?',
+        translation.settings_pacht_notes: 'Patch Notes',
         translation.settings_language: 'Sprache',
         translation.settings_language_deDE: 'Deutsch',
         translation.settings_language_enUS: 'Englisch',
