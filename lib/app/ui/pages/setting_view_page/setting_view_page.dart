@@ -5,8 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:about/about.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
-import 'package:ruhrkultur/app/controllers/authentication_controller.dart';
-import 'package:ruhrkultur/app/routes/app_routes.dart';
+
 
 class SettingViewPage extends StatefulWidget {
   const SettingViewPage({super.key});
@@ -45,12 +44,13 @@ class _SettingsPageState extends State<SettingViewPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text("Neu", style: TextStyle(fontSize: 20)),
-                Text("Dieser Update Dialog", style: TextStyle(fontSize: 15)),
+                Text("Demnächst", style: TextStyle(fontSize: 20)),
+                Gap(5),
+                Text("Einstellungs möglichkeit ob Bugs Automatich gemeldet werden", style: TextStyle(fontSize: 15)),
                 Gap(10),
-                Text("Entfernet", style: TextStyle(fontSize: 20)),
-                Text("Standort Abfrage im Hintergrund", style: TextStyle(fontSize: 15)),
-                Text("Acoount Pflicht", style: TextStyle(fontSize: 15)),
+                Text("Neu", style: TextStyle(fontSize: 20)),
+                Gap(5),
+                Text("App Reportet jetzt Ganz Anyome Fehler an uns.", style: TextStyle(fontSize: 15)),
                 // Add more languages here
               ],
             ),

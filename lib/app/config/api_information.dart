@@ -1,6 +1,6 @@
 class ApiInformation {
   // Base URL
-  String baseUrl = 'http://api.ruhrkulturerlebnis.de';
+  String baseUrl = 'https://hffzkcvj-8080.euw.devtunnels.ms';
 
   // Auth Endpoints
   String auth = '/auth';
@@ -10,7 +10,10 @@ class ApiInformation {
   //Audio Endpoints
   String audio = '/audio';
   String getAudioSafe = '/allaudioguids';
-  String getAudiobyPostion = '/getaudioGuideByPosition';
+  String getAudiobyPostion = '/audioGuid';
+
+//BugReport Endpoints
+String bug = '/bug';
 
   //AudioVideo Endpoints
   String audiovideo = '/getvideoInfo';
