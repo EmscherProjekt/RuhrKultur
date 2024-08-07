@@ -30,7 +30,7 @@ class AudioGuide {
       id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
       audioName: json['AudioName'] ?? '',
       audioBeschreibung: json['AudioBeschreibung'] ?? '',
-      imageUrl: json['imageUrl'] ?? '',
+      imageUrl: json['thumbnail'] ?? '',
       audioUrl: json['audioUrl'] ?? '',
       createdAt: json['createdAt'] ?? '',
       updatedAt: json['updatedAt'] ?? '',
