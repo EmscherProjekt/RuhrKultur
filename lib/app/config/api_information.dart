@@ -1,6 +1,6 @@
 class ApiInformation {
   // Base URL
-  String baseUrl = 'https://hffzkcvj-8080.euw.devtunnels.ms';
+  String baseUrl = 'http://212.87.212.106:3000';
 
   // Auth Endpoints
   String auth = '/auth';

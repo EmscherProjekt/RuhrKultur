@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:about/about.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
-
 
 class SettingViewPage extends StatefulWidget {
   const SettingViewPage({super.key});
@@ -34,6 +32,7 @@ class _SettingsPageState extends State<SettingViewPage> {
     version = info.version;
     buildNumber = info.buildNumber;
   }
+
   void _showUpdateDialog() {
     showDialog(
       context: context,
@@ -46,11 +45,14 @@ class _SettingsPageState extends State<SettingViewPage> {
               children: <Widget>[
                 Text("Demnächst", style: TextStyle(fontSize: 20)),
                 Gap(5),
-                Text("Einstellungs möglichkeit ob Bugs Automatich gemeldet werden", style: TextStyle(fontSize: 15)),
+                Text(
+                    "Einstellungs möglichkeit ob Bugs Automatich gemeldet werden",
+                    style: TextStyle(fontSize: 15)),
                 Gap(10),
                 Text("Neu", style: TextStyle(fontSize: 20)),
                 Gap(5),
-                Text("App Reportet jetzt Ganz Anyome Fehler an uns.", style: TextStyle(fontSize: 15)),
+                Text("App Reportet jetzt Ganz Anyome Fehler an uns.",
+                    style: TextStyle(fontSize: 15)),
                 // Add more languages here
               ],
             ),
@@ -59,6 +61,7 @@ class _SettingsPageState extends State<SettingViewPage> {
       },
     );
   }
+
   void _showLanguageSelectionDialog() {
     showDialog(
       context: context,
@@ -72,9 +75,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_deDE'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_deDE',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('de', 'DE'));
                     });
@@ -84,9 +84,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_enUS'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_enUS',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('en', 'US'));
                     });
@@ -96,9 +93,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_ruRU'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_ruRU',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('ru', 'RU'));
                     });
@@ -108,9 +102,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_trTR'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_trTR',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('tr', 'TR'));
                     });
@@ -120,9 +111,7 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_ukUA'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_ukUA',
-                    );
+                    ;
                     setState(() {
                       Get.updateLocale(const Locale('uk', 'UA'));
                     });
@@ -132,9 +121,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_frFR'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_frFR',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('fr', 'FR'));
                     });
@@ -144,9 +130,6 @@ class _SettingsPageState extends State<SettingViewPage> {
                 ListTile(
                   title: Text('settings_language_arAR'.tr),
                   onTap: () {
-                    Posthog().capture(
-                      eventName: 'feature_set_language_to_arAR',
-                    );
                     setState(() {
                       Get.updateLocale(const Locale('ar', 'AR'));
                     });

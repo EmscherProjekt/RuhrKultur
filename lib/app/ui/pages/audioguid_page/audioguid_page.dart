@@ -7,6 +7,7 @@ import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.dart';
 import 'package:ruhrkultur/app/ui/test/pages/music.dart';
 
+
 class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
 
@@ -19,9 +20,7 @@ class AudioguidPage extends GetView<AudioController> {
   final bool _useAutoFocus = true;
   final bool _autoEnableFlash = false;
 
-  void onInit() {
-  
-  }
+  void onInit() {}
 
   /*Future<void> _loadData() async {
     print("loadData");
@@ -49,7 +48,7 @@ class AudioguidPage extends GetView<AudioController> {
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed:  () => Get.find<AudioController>().fetchAudioGuides(),
+              onPressed: () => Get.find<AudioController>().fetchAudioGuides(),
             ),
             IconButton(
               icon: const Icon(Icons.camera),
@@ -59,53 +58,77 @@ class AudioguidPage extends GetView<AudioController> {
           ],
         ),
         body: Container(
-          child: Center(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                _showError("Refreshed");
-                return Future.value();
-              },
-              child: Obx(() {
-                if (controller.isLoading.value) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (controller.audioGuides.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("audio_page_no_data_found".tr,
-                            style: TextStyle(fontSize: 20)),
-                        TextButton(
-                          onPressed:Get.find<AudioController>().fetchAudioGuides,
-                          child: Text("audio_page_no_data_found_info".tr,
-                              style: TextStyle(fontSize: 20)),
-                        ),
-                      ],
+            child: DefaultTabController(
+          length: 1,
+          child: Scaffold(
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TabBar(
+                  tabs: [
+                    Tab(
+                      text: 'audio_page_tab_all'.tr,
                     ),
-                  );
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: ListView.builder(
-                      itemCount: controller.audioGuides.length,
-                      itemBuilder: (context, index) {
-                        final audioGuide = controller.audioGuides[index];
-                        return GestureDetector(
-                          onTap: () {
-                            print(audioGuide);
-                          },
-                          child: AudioguidCard(
-                            audioGuide: audioGuide,
-                          ),
-                        );
-                      },
+                  ],
+                ),
+                Expanded(
+                    child: TabBarView(children: [
+                  SingleChildScrollView(
+                    child: Center(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          _showError("Refreshed");
+                          return Future.value();
+                        },
+                        child: Obx(() {
+                          if (controller.isLoading.value) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (controller.audioGuides.isEmpty) {
+                            return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("audio_page_no_data_found".tr,
+                                      style: TextStyle(fontSize: 20)),
+                                  TextButton(
+                                    onPressed: Get.find<AudioController>()
+                                        .fetchAudioGuides,
+                                    child: Text(
+                                        "audio_page_no_data_found_info".tr,
+                                        style: TextStyle(fontSize: 20)),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ListView.builder(
+                                itemCount: controller.audioGuides.length,
+                                itemBuilder: (context, index) {
+                                  final audioGuide =
+                                      controller.audioGuides[index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      print(audioGuide);
+                                    },
+                                    child: AudioguidCard(
+                                      audioGuide: audioGuide,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                        }),
+                      ),
                     ),
-                  );
-                }
-              }),
+                  ),
+                ])),
+              ],
             ),
           ),
-        ),
+        )),
       ),
     );
   }

@@ -29,6 +29,10 @@ class NavpagePage extends GetView<NavpageController> {
                 icon: Icon(Icons.settings),
                 label: 'Settings',
               ),
+               BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'Game',
+              ),
             ],
             currentIndex: controller.currentIndex.value,
             selectedItemColor: Colors.pink,

@@ -12,4 +12,5 @@
 
   static const NAVPAGE = '/navpage';
   static const FUNKTION_AKTIVERT = '/funktion-aktivert';
+  static const GAME = '/game';
 }

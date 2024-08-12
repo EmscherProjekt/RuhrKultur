@@ -59,6 +59,8 @@ class ruRU {
             'Политикой конфиденциальности',
 
         //Audio
+        translation.audio_page_tab_all: 'Alle',
+        translation.audio_page_map: 'Karte',
         translation.audio_page_title: 'Страница аудиогида',
         translation.audio_page_tooltip_scan: 'Сканировать QR-код',
         translation.audio_page_no_data_found: 'Данные не найдены',

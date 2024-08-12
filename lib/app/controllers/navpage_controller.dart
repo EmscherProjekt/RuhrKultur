@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruhrkultur/app/bindings/audioguid_binding.dart';
+import 'package:ruhrkultur/app/bindings/game_binding.dart';
 import 'package:ruhrkultur/app/bindings/home_binding.dart';
 import 'package:ruhrkultur/app/bindings/setting_view_binding.dart';
 import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/audioguid_page.dart';
+import 'package:ruhrkultur/app/ui/pages/game_page/game_page.dart';
 import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
 import 'package:ruhrkultur/app/ui/pages/setting_view_page/setting_view_page.dart';
 
@@ -17,6 +19,7 @@ class NavpageController extends GetxController {
     AppRoutes.HOME,
     '/audioguid-view',
     AppRoutes.SETTING_VIEW,
+    AppRoutes.GAME
   ];
 
   void changePage(int index) {
@@ -45,6 +48,14 @@ class NavpageController extends GetxController {
         settings: settings,
         page: () => SettingViewPage(),
         binding: SettingViewBinding(),
+      );
+    }
+    
+    if (settings.name == AppRoutes.GAME) {
+      return GetPageRoute(
+        settings: settings,
+        page: () => GamePage(),
+        binding: GameBinding(),
       );
     }
     return null;

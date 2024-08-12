@@ -57,6 +57,8 @@ class deDE {
         translation.auth_terms_and_conditions_four: 'Datenschutzerklärung zu',
 
         //Audio
+        translation.audio_page_tab_all: 'Alle',
+        translation.audio_page_map: 'Karte',
         translation.audio_page_title: 'Audioguide Page',
         translation.audio_page_tooltip_scan: 'QR-Code scannen',
         translation.audio_page_no_data_found: 'Keine Daten gefunden',

@@ -60,6 +60,8 @@ class frFR {
             'Politique de confidentialité',
 
         //Audio
+        translation.audio_page_tab_all: 'Alle',
+        translation.audio_page_map: 'Karte',
         translation.audio_page_title: 'Page du guide audio',
         translation.audio_page_tooltip_scan: 'Scanner le code QR',
         translation.audio_page_no_data_found: 'Aucune donnée trouvée',

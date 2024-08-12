@@ -6,6 +6,8 @@ const navigation_bar_settings = 'navigation_bar_settings';
 const navigation_bar_audioguid = 'navigation_bar_audioguid';
 //Audio
 const audio_page_title = 'audio_page_title';
+const audio_page_tab_all = 'audio_page_tab_all';
+const audio_page_map = 'audio_page_map';
 const audio_page_tooltip_scan = 'audio_page_tooltip_scan';
 const audio_player_current_song = 'audio_player_current_song';
 const audio_player_current_description = 'audio_player_current_description';

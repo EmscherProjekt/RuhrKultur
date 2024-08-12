@@ -1,4 +1,6 @@
-import 'package:get/get.dart';
+import '../bindings/game_binding.dart';
+import '../ui/pages/game_page/game_page.dart';
+      import 'package:get/get.dart';
 
 import 'package:ruhrkultur/app/ui/pages/home_page/home_page.dart';
 import '../bindings/navpage_binding.dart';
@@ -80,5 +82,11 @@ class AppPages {
       binding: NavpageBinding(),
       transition: _defaultTransition,
     ),
-  ];
+    GetPage(
+      name: AppRoutes.GAME,
+      page: () => const GamePage(),
+      binding: GameBinding(),
+      transition: _defaultTransition,
+    ), 
+];
 }
