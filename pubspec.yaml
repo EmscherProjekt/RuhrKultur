@@ -1,7 +1,7 @@
 name: ruhrkultur
 description: A new Flutter project.
 
-version: 0.4.93-alpha+0.4.93
+version: 0.4.94-alpha+0.4.94
 
 environment:
   sdk: ">=2.19.0 <3.22.0"
@@ -51,9 +51,10 @@ dependencies:
   #Game engine
   flame: ^1.18.0
   #Map
-  flutter_map: ^7.0.2
+  google_maps_flutter: ^2.9.0
+  #Location
   latlong2: ^0.9.1
-
+  in_app_update: ^4.2.3
 dev_dependencies:
   # #to make native splash screen
   # # 1) change path image_path
