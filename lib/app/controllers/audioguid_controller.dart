@@ -2,13 +2,14 @@ import 'dart:async';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:ruhrkultur/app%20-%20Kopie/data/services/service_locator.dart';
 import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/progress_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/repeat_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
 import 'package:audio_service/audio_service.dart';
+
+import '../data/services/service_locator.dart';
 
 class AudioController extends GetxController {
   // Audio guides

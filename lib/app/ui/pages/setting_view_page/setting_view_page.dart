@@ -268,9 +268,7 @@ class _CustomListTile extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.icon,
-      this.trailing,
-      this.widget,
-      this.onTap})
+      this.onTap, this.trailing, this.widget})
       : super(key: key);
 
   @override
