@@ -6,8 +6,6 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ruhrkultur/app/controllers/audioguid_controller.dart';
 import 'package:ruhrkultur/app/ui/pages/audioguid_page/widgets/audioguid_card.dart';
 import 'package:ruhrkultur/app/ui/test/pages/music.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 
 class AudioguidPage extends GetView<AudioController> {
   AudioguidPage({Key? key}) : super(key: key);
