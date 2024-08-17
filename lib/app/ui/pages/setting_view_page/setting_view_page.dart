@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:about/about.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 class SettingViewPage extends StatefulWidget {
   const SettingViewPage({super.key});
@@ -18,11 +19,34 @@ class _SettingsPageState extends State<SettingViewPage> {
   late String version;
   late String buildNumber;
 
+  AppUpdateInfo? _updateInfo;
+  bool _flexibleUpdateAvailable = false;
   @override
   void initState() {
     super.initState();
+    InAppUpdate.installUpdateListener;
     initPackageInfo();
     // Initialize your variables here
+  }
+
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      setState(() {
+        _updateInfo = info;
+        print(info.toString());
+      });
+    }).catchError((e) {
+      showSnack(e.toString());
+    });
+  }
+
+  void showSnack(String text) {
+    if (_scaffoldKey.currentContext != null) {
+      ScaffoldMessenger.of(_scaffoldKey.currentContext!)
+          .showSnackBar(SnackBar(content: Text(text)));
+    }
   }
 
   Future<void> initPackageInfo() async {
@@ -43,6 +67,13 @@ class _SettingsPageState extends State<SettingViewPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Text(
+                  "Update Info",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Gap(5),
+                Text(_updateInfo.toString(), style: TextStyle(fontSize: 15)),
+                Gap(10),
                 Text("Demnächst", style: TextStyle(fontSize: 20)),
                 Gap(5),
                 Text(
@@ -203,6 +234,13 @@ class _SettingsPageState extends State<SettingViewPage> {
                   _showUpdateDialog();
                 },
               ),
+              _CustomListTile(
+                title: "Auf Update prüfen",
+                icon: Icons.new_releases,
+                onTap: () {
+                  checkForUpdate();
+                },
+              ),
               /*    _CustomListTile(
                   title: 'Log out',
                   icon: Icons.logout,
@@ -230,9 +268,7 @@ class _CustomListTile extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.icon,
-      this.trailing,
-      this.widget,
-      this.onTap})
+      this.onTap, this.trailing, this.widget})
       : super(key: key);
 
   @override

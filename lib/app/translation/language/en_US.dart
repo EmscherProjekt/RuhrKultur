@@ -59,7 +59,7 @@ class enUS {
 
         //Audio
         translation.audio_page_tab_all: 'Alle',
-        translation.audio_page_map: 'Karte',
+        translation.audio_page_tab_map: 'Karte',
         translation.audio_page_title: 'Audioguide Page',
         translation.audio_page_tooltip_scan: 'Scan QR Code',
         translation.audio_page_no_data_found: 'No data found',

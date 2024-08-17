@@ -8,7 +8,6 @@ import 'package:ruhrkultur/app/data/models/response/audioguid.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:ruhrkultur/app/data/models/response/audioguid_video.dart';
-import 'package:ruhrkultur/app/routes/app_routes.dart';
 import 'package:geolocator/geolocator.dart';
 
 class ApiService {
@@ -114,7 +113,7 @@ class ApiService {
       textConfirm: buttonText,
       confirmTextColor: Colors.white,
       onConfirm: () {
-        Get.toNamed(AppRoutes.HOME);
+       
         Get.back();
       },
     );

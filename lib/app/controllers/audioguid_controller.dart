@@ -7,8 +7,9 @@ import 'package:ruhrkultur/app/data/notifiers/play_button_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/progress_notifier.dart';
 import 'package:ruhrkultur/app/data/notifiers/repeat_button_notifier.dart';
 import 'package:ruhrkultur/app/data/services/audio_guid_api_service.dart';
-import 'package:ruhrkultur/app/data/services/service_locator.dart';
 import 'package:audio_service/audio_service.dart';
+
+import '../data/services/service_locator.dart';
 
 class AudioController extends GetxController {
   // Audio guides

@@ -59,7 +59,7 @@ class ukUA {
 
         //Audio
         translation.audio_page_tab_all: 'Alle',
-        translation.audio_page_map: 'Karte',
+        translation.audio_page_tab_map: 'Karte',
         translation.audio_page_title: 'Сторінка аудіогіда',
         translation.audio_page_tooltip_scan: 'Сканувати QR-код',
         translation.audio_page_no_data_found: 'Дані не знайдені',
